@@ -4,6 +4,131 @@
   
     
     <entry>
+      <title>表格制作</title>
+      <link href="/2023/09/18/%E8%A1%A8%E6%A0%BC%E5%88%B6%E4%BD%9C/"/>
+      <url>/2023/09/18/%E8%A1%A8%E6%A0%BC%E5%88%B6%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、常规三线表"><a href="#一、常规三线表" class="headerlink" title="一、常规三线表"></a>一、常规三线表</h2><p><img src="/2023/09/18/%E8%A1%A8%E6%A0%BC%E5%88%B6%E4%BD%9C/image-20230907135410944.png" alt="image-20230907135410944"></p><ul><li>字体：新罗马</li></ul><h2 id="二、特殊三线表"><a href="#二、特殊三线表" class="headerlink" title="二、特殊三线表"></a>二、特殊三线表</h2><h3 id="1-长表"><a href="#1-长表" class="headerlink" title="1. 长表"></a>1. 长表</h3><ul><li>excel中对半分割，粘贴到word中</li><li>设置三线表，中间插入</li></ul><h3 id="2-宽表"><a href="#2-宽表" class="headerlink" title="2.宽表"></a>2.宽表</h3><ul><li>分成几组，“续表”连接表格</li><li>布局——&gt;水平居中 针对文字</li></ul><h3 id="3-有单元格列表的表格"><a href="#3-有单元格列表的表格" class="headerlink" title="3. 有单元格列表的表格"></a>3. 有单元格列表的表格</h3><ul><li>白色断点——白色边框</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学建模 论文 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>html基础知识</title>
+      <link href="/2023/09/18/html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/"/>
+      <url>/2023/09/18/html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</url>
+      
+        <content type="html"><![CDATA[<h2 id="一、html基本结构"><a href="#一、html基本结构" class="headerlink" title="一、html基本结构"></a>一、html基本结构</h2><ul><li><p>start task</p></li><li><p>content</p></li><li><p>end task</p></li><li><p>文档结构</p><p>- </p>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span> </span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">这里的内容无法显示在网页上</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">显示在网页中的部分</span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>  头部信息：</p><p>  <img src="/2023/09/18/html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/image-20230913212111951.png" alt="image-20230913212111951"></p><ul><li>link：导入css</li><li>meta两种形式：<ul><li><img src="/2023/09/18/html%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/image-20230913212137840.png" alt="image-20230913212137840"></li></ul></li></ul></li></ul><h2 id="二、结构标签"><a href="#二、结构标签" class="headerlink" title="二、结构标签"></a>二、结构标签</h2><ul><li><p>命名实体——&amp;xxx</p><ul><li>空格换行，只认一个——命名实体</li></ul></li><li><p>img标签</p><p>- </p>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;图片地址（本地/网页）&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;替代，图片无效给出文本提示&quot;</span> <span class="attr">height</span>= <span class="string">&quot;&quot;</span> <span class="attr">width</span>=<span class="string">&quot;pix/50%&quot;</span> <span class="attr">title</span>=<span class="string">&quot;补充性说明&quot;</span></span></span><br></pre></td></tr></table></figure></li><li><p>&lt;a标签</p><p>- </p>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">herf</span> =<span class="string">&quot;完整url&quot;</span> <span class="attr">target</span>=<span class="string">&quot;self(本窗口)/blank（新窗口）&quot;</span> #<span class="attr">超链接作用</span></span></span><br><span class="line"><span class="tag">&lt;<span class="attr">a</span> <span class="attr">herf</span> =<span class="string">&quot;#id&quot;</span> <span class="attr">target</span>=<span class="string">&quot;self(本窗口)/blank（新窗口）&quot;</span> #<span class="attr">锚id</span></span></span><br><span class="line"><span class="tag"><span class="attr">id属性</span>：<span class="attr">id----唯一标识</span>，<span class="attr">能让锚自动连接到</span></span></span><br></pre></td></tr></table></figure></li><li><p>&lt;table标签</p><p>- </p>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">table</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">caption</span>&gt;</span>表头</span><br><span class="line"><span class="tag">&lt;<span class="name">thead</span>&gt;</span>标题栏</span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span>#一行</span><br><span class="line"><span class="tag">&lt;<span class="name">th</span>&gt;</span>#标题值</span><br><span class="line"><span class="tag">&lt;<span class="name">th</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">thead</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">tbody</span>&gt;</span>#表体</span><br><span class="line"><span class="tag">&lt;<span class="name">tr</span>&gt;</span>#一行</span><br><span class="line"><span class="tag">&lt;<span class="name">td</span> <span class="attr">rowspan</span>/<span class="attr">colspan</span>(<span class="attr">横跨</span> <span class="attr">纵跨</span>)&gt;</span>#data</span><br></pre></td></tr></table></figure></li><li><ol <p>- <p></p>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ol</span> <span class="attr">type</span> &quot;(<span class="attr">1</span>/<span class="attr">A</span>/<span class="attr">I</span>)&quot; <span class="attr">start</span> &quot;(<span class="attr">从哪一个标号开始</span>)&quot;&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>xxx</span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>XXX</span><br><span class="line">&lt;\ol&gt;</span><br><span class="line">#order list</span><br></pre></td></tr></table></figure></ol></li><li><p>&lt;ul———做表单</p><p>- </p>  <figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">type</span> &quot;(<span class="attr">1</span>/<span class="attr">A</span>/<span class="attr">I</span>)&quot; <span class="attr">start</span> &quot;(<span class="attr">从哪一个标号开始</span>)&quot;&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>xxx</span><br><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>XXX</span><br><span class="line">&lt;\ul&gt;</span><br><span class="line">#unorder list</span><br></pre></td></tr></table></figure></li><li><p>&lt;dl——自定义列表</p><ul><li><p>​</p><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dl</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dt</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dd</span>&gt;</span>#dt的子列表</span><br></pre></td></tr></table></figure></li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> web应用开发 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> html 基本标签 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>butterfly主题配置踩坑</title>
+      <link href="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/"/>
+      <url>/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>原始的hexo博客界面比较简单，在查阅了很多资料以后，选择了butterfly主题，应为他的参考文档非常全面，并且配置人数也比较多，解决bug的概率也较大，本篇博客记录于butterfly主题配置完成时，后续将对现有主题经行魔改。</p></blockquote><h1 id="一、主题展示"><a href="#一、主题展示" class="headerlink" title="一、主题展示"></a>一、主题展示</h1><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915102936524.png" alt="image-20230915102936524"></p><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915103117025.png" alt="image-20230915103117025"></p><h2 id="二、踩坑记录"><a href="#二、踩坑记录" class="headerlink" title="二、踩坑记录"></a>二、踩坑记录</h2><p>在本次主题更改上，由于参考了很多文档，下载了很多插件，修改了很多配置，造成后续问题排除较为困难，小博在配置过程中遇到了一些网上几乎没有解决方法的问题，在下面予以记录。</p><ol><li>图片路径问题</li></ol><p>hexo博客能够将md文档渲染成html在web上显示，但是图片的插入是需要手动配置的，尝试很多博主的教程以后找到了一种可行的解决方式：</p><ul><li><p>修改tpyro的图片路径相关设置：</p></li><li><p>安装插件，将md文档中的相对路径转换为html中的绝对路径</p></li></ul><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</span><br><span class="line"></span><br></pre></td></tr></table></figure><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915104437952.png" alt="image-20230915104437952"></p><p>  转换后的路径显示：</p><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915104506178.png" alt="image-20230915104506178"></p><blockquote><p>这里由于我设置的post名称为中文，所以转化成了url编码（这是自动的，网上看见说中文title无法正常显示图片，但是我实测下来是没问题的），即可以在bash中运行 <code>hexo new 中文标题</code></p></blockquote><ol start="2"><li>代码块显示问题</li></ol><p>代码块的显示坑了我好久——这里建议，在才开始搭建的时候就按照butterfly的官方说明文档安装，不要网上各种搜罗搭建博客，我就是在搭建过程中不知道什么时候安装了第三方插件用于代码显示，造成了后续博客渲染除了问题，而且没有任何报错，排除问题很麻烦。</p><ul><li><p>修改highlight显示，但是无效，</p><ul><li>前端渲染如下：</li></ul><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915105230219.png" alt="image-20230915105230219"></p><ul><li>原始md文档如下：</li></ul><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915105455077.png" alt="image-20230915105455077"></p><ul><li>在主题配置中，我修改了<code>highlight</code>中的配置如下：</li></ul></li></ul><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915105621030.png" alt="image-20230915105621030"></p><pre><code>  可以发现，几乎所有的配置都没有生效，反而格式混乱，经过各种尝试并且又仔细阅读了官方文档：</code></pre><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915105835747.png" alt="image-20230915105835747"></p><p>于是我想到可能我可能安装了第三方插件，导致格式混论，于是在网上找到一个教程，说可能下载了插件<code>“hexo-prism-plugin</code>”，于是按照教程卸载：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm uninstall hexo-prism-plugin</span><br></pre></td></tr></table></figure><p>再次修改原生配置文件中的字段：</p><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">highlight:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">true</span></span><br><span class="line">  line_number: <span class="literal">false</span></span><br><span class="line">  auto_detect: <span class="literal">false</span></span><br><span class="line">  tab_replace: <span class="string">&#x27;&#x27;</span></span><br><span class="line">  wrap: <span class="literal">true</span></span><br><span class="line">  hljs: <span class="literal">false</span></span><br><span class="line">prismjs:</span><br><span class="line">  <span class="built_in">enable</span>: <span class="literal">false</span></span><br><span class="line">  preprocess: <span class="literal">true</span></span><br><span class="line">  line_number: <span class="literal">true</span></span><br><span class="line">  tab_replace: <span class="string">&#x27;&#x27;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure><p>最后代码块样式成功显示：</p><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915110438643.png" alt="image-20230915110438643"></p><ol start="2"><li><p>但是如上，代码格式并没有正常显示，这个问题比较刁钻，因为这可能是原生hexo解释typro的时候潜存的一个问题：</p><p>在列表后插入代码块一定要换行！！！</p><p>如果不换行就是上面的效果。</p><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915110808565.png" alt="image-20230915110808565"></p></li></ol><h2 id="三、最终效果"><a href="#三、最终效果" class="headerlink" title="三、最终效果"></a>三、最终效果</h2><p>在排除完这一系列问题后，博文终于正常显示：</p><p><img src="/2023/09/18/butterfly%E4%B8%BB%E9%A2%98%E9%85%8D%E7%BD%AE%E8%B8%A9%E5%9D%91/image-20230915111111307.png" alt="image-20230915111111307"></p><p>接下来就是精心设计一下自己的博客啦，前期的很多图片都是网上随意找的，侧边栏等也还没有更改，后续慢慢更新！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 主题更改配置 butterfly </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>数模论文写作</title>
+      <link href="/2023/09/18/%E6%95%B0%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/"/>
+      <url>/2023/09/18/%E6%95%B0%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>针对论文写作的初步探究，数模论文突击，根据视频做简要笔记。</p></blockquote><h2 id="一、标题"><a href="#一、标题" class="headerlink" title="一、标题"></a>一、标题</h2><ul><li>基于xxx方法的xxx（问题）模型</li></ul><h2 id="二、摘要"><a href="#二、摘要" class="headerlink" title="二、摘要"></a>二、摘要</h2><ul><li><p>最后写</p></li><li><p>篇幅：首页3&#x2F;4（1000）</p></li><li><p>写作技巧：</p><ul><li><p>开头：3-5行</p><ul><li>简单交代论文背景，题目研究什么</li><li>我们是怎么做的，提取关键词，用到的关键模型，方法，或者关键的逻辑。【重要】</li></ul></li><li><p>中间：</p><ul><li>模式：针对问题一、二、三</li><li>每一点如何书写：<ul><li>梳理清楚每个问题之间的关联【是并行的，还是有层次的】来决定我们的论文该如何在优秀论文的框架下进行变动，确定最后的层次</li><li>在每个问题下，要说清楚<strong>我们</strong>研究的问题【为了得到最终结果，我们应该要求的变量关系或者值&#x2F;值的范围】，我们是利用什么方法研究的，最后得到了什么结果。&#x3D;&#x3D;有数值计算一定要明确写出，如果结果过于庞杂，要给出明确结果引导【在xxx有完整结果】&#x3D;&#x3D;</li><li>注意：在阐述模型时，要解释清楚模型的<strong>关键参数含义</strong>。</li><li>总结：有问题，就要有方法，就要有结果。不管是根据题目的现有问题，还是自己提炼出的问题，都是这样。语句之间要有逻辑性。</li></ul></li></ul></li><li><p>结尾：介绍亮点（如果有），说一下推广性（如果想的出来）。</p><ul><li>要客观，站在别人的角度第一次读，要给人以说服性。</li></ul></li><li><p>废话提升</p><ul><li><p>紧密结合题目本身。</p><ul><li>eg：此模型较优–&gt;哪里优了–&gt;【<strong>有对比</strong>】【<strong>有数据</strong>】</li></ul></li></ul></li></ul></li></ul><h2 id="三、关键词"><a href="#三、关键词" class="headerlink" title="三、关键词"></a>三、关键词</h2><ul><li>个数：4-6</li><li>模型，问题</li></ul><h2 id="四、问题重述"><a href="#四、问题重述" class="headerlink" title="四、问题重述"></a>四、问题重述</h2><ul><li>目的：为了防止查重</li><li>篇幅：不超过1页</li><li>方式：从题目中总结出问题的<ul><li>背景</li><li>每个问题的进一步说明，包含一些模糊的方式方法</li></ul></li></ul><h2 id="五、问题分析"><a href="#五、问题分析" class="headerlink" title="五、问题分析"></a>五、问题分析</h2><ul><li>篇幅：不超过1页，最多不超过2页</li><li>作用：承上启下，承接问题，启发模型建立</li><li>写作模式：针对每个问题单独有一段，小标题隔开</li><li>位置：重述之后。</li><li>必要——流程图&#x2F;思维导图【每一题一个，或者要是思考得能够更加深入，就总体画一个】</li></ul><h2 id="六、模型假设"><a href="#六、模型假设" class="headerlink" title="六、模型假设"></a>六、模型假设</h2><ul><li><p>目的：简化模型</p></li><li><p>类型：</p><ul><li>题目明确给出</li><li>排除生活小概率事件</li><li>核心因素，不可过于简化</li><li>使用的模型中本身有的假设</li><li>对模型中的参数形式（或分布）假设【有验证，比如假设泊松分布，要说，图形化出来钟形】</li><li>深入挖掘模型后为了简化模型的假设【实践以后】</li></ul></li><li><p>合理性说服：【少，能就说】</p><ul><li>引用别人的资料</li><li>数据、绘图支撑</li><li>假设检验</li></ul></li><li><p>模型评价与改进——弥补 <strong>太过简化</strong> 的问题</p></li></ul><h2 id="七、符号说明"><a href="#七、符号说明" class="headerlink" title="七、符号说明"></a>七、符号说明</h2><ul><li>形式：三线表</li><li>包含：<ul><li>重要符号，一些临时的变量可以忽略，</li><li>含义解释</li><li>单位（可以不写）</li></ul></li></ul><h2 id="八、模型建立与求解"><a href="#八、模型建立与求解" class="headerlink" title="八、模型建立与求解"></a>八、模型建立与求解</h2><ul><li><p>模型选择</p><ul><li>简洁，实用</li></ul></li><li><p>写作模式：</p><ul><li>大点：问题x的模型建立与求解，【根据实际情况选择以下两种架构中的一个】</li></ul><p><img src="/2023/09/18/%E6%95%B0%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/image-20230915083737851-16947382658551.png" alt="image-20230915083737851"></p><p>​                               1.  适合小标题层数较少的情况</p><p>​                               2.  适合小标题层数较多的情况【会更加简洁】</p><ul><li><p>小点：主要层次为：</p><ol><li>模型的建立</li></ol><ul><li><p><strong>统计分析</strong>为主，无需建模【第一问，规律，统计性分析】</p><ul><li>&#x3D;&#x3D;亮点&#x3D;&#x3D;：数据检查处理<ul><li>异常值</li><li>插值</li><li>无量纲处理</li><li>统计分析软件、统计量阐释【方差..】</li><li>漂亮的图</li></ul></li></ul></li><li><p>使用已有模型建立求解</p><ul><li><p><strong>评价类</strong></p><blockquote><p>数据或条件，建立客观的指标体系</p></blockquote><ul><li><p>主观评价【无数据支撑】</p><ul><li>层次分析</li><li>模糊综合评价</li><li>综合指数法</li></ul></li><li><p>客观评价 【有数据支撑】    </p><ul><li>主成分分析</li><li>因子分析</li><li>Topsisi评价</li><li>神经网络分析</li></ul><p>步骤</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.明确评价目的建立指标体系</span><br><span class="line">有代表性，确定性【可量化】，独立性，区别能力</span><br><span class="line">2.指标体系规范化处理，一致化、无量纲化</span><br><span class="line">无量纲化：归一化，标准差，极值差法，功效系数</span><br><span class="line">3.确定指标体系对应的权重系数</span><br><span class="line">主管定权，客观定权</span><br><span class="line">4.选择或构造综合评价模型</span><br><span class="line">线性加权：各个指标保持独立</span><br><span class="line">非线性加权：不具有独立型</span><br></pre></td></tr></table></figure></li></ul></li><li><p><strong>预测类</strong></p><blockquote><p>预测事物的一些未知属性或已知属性未来的趋势</p></blockquote><ul><li><p>中短期预测：【10-50年】</p><ul><li>回归分析</li><li>时间序列预测</li><li>微分方程预测</li></ul></li><li><p>长期预测【100年】</p><ul><li>神经网络</li><li>Logistic</li><li>微分方程</li></ul><p>步骤：</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">1.原始数据预处理</span><br><span class="line">残缺之补全、异常值剔除等</span><br><span class="line">2.根据条件选择/建立合适的模型</span><br><span class="line">中短期、长期、大样本/小样本</span><br><span class="line">3.对模型预测结果进行误差分析</span><br><span class="line">绝对误差分析、相对误差分析等</span><br><span class="line">一般相对误差——一级0.01，二级0.05【中短期】</span><br><span class="line">——三级0.5【长期】</span><br><span class="line">4.给出最终的预测结果，回答问题</span><br></pre></td></tr></table></figure></li></ul></li><li><p><strong>优化类</strong>：</p><blockquote><p>条件固定，取最优</p></blockquote><ul><li><p>根据目标函数及约束函数类型分类</p><ul><li>线性规划</li><li>非线性规划</li><li>二次规划</li></ul></li><li><p>根据决策变量的类型分类</p><ul><li>整数规划</li><li>混合整数</li><li>0-1规划</li></ul></li><li><p>其他</p><ul><li>单目标规划</li><li>动态规划与静态规划</li><li>随机规划与确定规划</li></ul><p>步骤</p><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">三因素：</span><br><span class="line">目标函数</span><br><span class="line">决策变量【自变量】</span><br><span class="line">约束条件</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure><p><img src="/2023/09/18/%E6%95%B0%E6%A8%A1%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/Screenshot_20230906_101030_tv.danmaku.bili_edit_8.jpg" alt="Screenshot_20230906_101030_tv.danmaku.bili_edit_8"></p></li></ul></li></ul></li><li><p>结合已有模型，或者优化&#x2F;改进模型【针对优化改进的部分详细说明】</p><ul><li><p>出发点：</p><ul><li>原有模型存在一定固有缺陷</li><li>原有模型对现有模型不太实用</li><li>原模型太简单，考虑的内容太少</li></ul></li><li><p>注意点：</p><ul><li>为什么改进</li><li>如何改进<ul><li>伪代码【档次】【三线】</li><li>流程图</li></ul></li><li>前后对比【模型复杂度，准确度，时效性，可操作性…】</li></ul></li><li><p>常见的集成：</p><ul><li><p>评价类，定权更加准确</p><ul><li><strong>基于层次分析-熵权法的综合评价模型</strong></li></ul></li><li><p>预测类，小样本预测</p><ul><li><strong>基于灰色—-bp神经网络综合预测模型</strong><ul><li>灰色：数据量少，误差大</li><li>神经：数据量大，防过拟合</li><li>灰色预测未来结果 带入到神经网络，作为输入，真实作为输出、神经网络自动拟合二者差值作为误差。</li></ul></li></ul></li><li><p>评价类、预测类均可用，精度更高</p><ul><li><strong>基于遗传算法的BP伸进网络优化算法</strong><ul><li>BP：初值和阈值随机，容易陷入局部最小值</li><li>遗传算法：把初值和阈值设定得更加精确</li></ul></li></ul></li><li><p>预测类，大样本：</p><ul><li><p><strong>基于小波变换——神经网络的预测模型</strong></p><ul><li>传统神经网络的隐含层——s&#x2F;t—&gt;小波的基函数</li></ul></li></ul></li></ul></li></ul></li><li><p>模型的求解</p><ul><li>物理数学：<ul><li>务必具体的结果 单位</li></ul></li><li>评价&#x2F;预测类型<ul><li>需要结合图标&#x3D;表表现，注意格式，美观</li></ul></li><li>解释原因，给出建议等开放类赛题<ul><li>分条作答（4最多）</li></ul></li></ul></li></ul></li></ul></li></ul><h2 id="九、模型检验"><a href="#九、模型检验" class="headerlink" title="九、模型检验"></a>九、模型检验</h2><ul><li><p><strong>稳定性和敏感性分析</strong>【重点】</p><ul><li>使用场景：模型中某些参数固定，【查的资料.题目固定..】</li><li>目的：检验模型中某参数变化是否引起模型输出产生变化</li><li>稳定性：独立的参数<code>y=ax+b</code>中的<code>b</code>       <ul><li>b上下浮动%5，画出曲线，观察平整度</li></ul></li><li>敏感性：作用在变量上的参数</li><li>y-x图：与时间有关，时间横坐标</li><li>b-y图：与时间无关，只为得总体数值</li></ul></li><li><p>统计检验与误差分析</p><ul><li>统计检验——&#x3D;&#x3D;回归分析&#x3D;&#x3D;<ul><li>统计检验——假设检验</li><li>级比检验——灰色模型</li><li>一般包括t&#x2F;f</li><li>主要写在 <strong>建模过程</strong></li></ul></li><li>误差分析——预测类<ul><li><strong>建模过程</strong>：真实值和预测值的误差——&lt;0.1，计算说明</li><li><strong>末尾</strong>：无真实数据，分析目标来源，简单说明。</li></ul></li></ul></li><li><p>新旧模型对比——改进模型：</p><ul><li>结果精度</li><li>模型复杂度</li><li>模型运行效率【神经网络】</li><li>模型可推广性</li></ul></li></ul><h2 id="十、模型优缺点"><a href="#十、模型优缺点" class="headerlink" title="十、模型优缺点"></a>十、模型优缺点</h2><ul><li>优点多写</li><li>不局限于模型，包括建模过程</li><li>优点表述：（4-6）<ul><li>简洁实用，高效</li><li>创新【少】</li><li>准确</li><li>考虑全面</li><li>进行各类检验，稳定性高</li><li>模型本身的优缺点</li></ul></li><li>缺点表述：（2-4）<ul><li>受xx因素限制，未考虑xxx，影响精度</li><li>理想，降低模型普适性</li><li>考虑了xx因素，计算时间长，复杂</li><li>模型本身的缺点</li></ul></li></ul><h2 id="十一、参考文献"><a href="#十一、参考文献" class="headerlink" title="十一、参考文献"></a>十一、参考文献</h2><h2 id="十二、附录"><a href="#十二、附录" class="headerlink" title="十二、附录"></a>十二、附录</h2><ul><li>包括支撑材料的文件列表、所有源代码【模型求解】</li><li>不便展开的结果</li><li>前面的表不便全部展开的，放在附录</li><li>另起一页</li></ul><h2 id="十三、支撑材料"><a href="#十三、支撑材料" class="headerlink" title="十三、支撑材料"></a>十三、支撑材料</h2><ul><li>所有源程序以及调用说明</li><li>除题目所给数据以外的数据</li><li>较大篇幅的中间结果，图形，表格</li><li>公开渠道找到的相关资料</li></ul><h2 id="十四、特别注意"><a href="#十四、特别注意" class="headerlink" title="十四、特别注意"></a>十四、特别注意</h2><ul><li>WinRAR压缩</li><li>不要过分依赖智能算法，容易陷入局部最优值，如果使用，要极值检验</li><li>避免三把斧现象：层次分析、模糊综合评价、灰色预测与评价</li><li>一定要进行模型检验！！！</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数学建模 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 数学建模、论文 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>hexo博客搭建踩坑</title>
+      <link href="/2023/09/18/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91/"/>
+      <url>/2023/09/18/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>由于网络上基于hexo+github的博客搭建框架已经记录非常详细，我的第一篇博客就记录一下搭建过程中遇到的问题。</p></blockquote><h2 id="一、Node-Js环境配置"><a href="#一、Node-Js环境配置" class="headerlink" title="一、Node.Js环境配置"></a>一、Node.Js环境配置</h2><p>Node.Js一定要注意环境变量的各种配置，具体参考博客：<a href="https://blog.csdn.net/weixin_44893902/article/details/121788104?spm=1001.2014.3001.5506"></a></p><p>以下展示关键点：</p><ul><li>​新建两个文件夹</li></ul><p>​<code>node_global</code></p><p>​<code>node_cache</code></p><p><img src="/2023/09/18/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91/image-20230905144459747.png" alt="image-20230905144459747"></p><ul><li>​建立之后在管理员权限下config刚刚建立的文件夹，【目的是将利用npm下载的模块以及缓存放在这两个文件夹下】</li></ul><p>​<code>npm config set prefix &quot;node_global路径&quot;</code></p><p>​<code>npm config set cache &quot;node_cache路径&quot;</code></p><p>​剩余操作详见上述参考博文</p><h2 id="二、权限问题解决——INFO-Install-dependencies安装出错"><a href="#二、权限问题解决——INFO-Install-dependencies安装出错" class="headerlink" title="二、权限问题解决——INFO Install dependencies安装出错"></a>二、权限问题解决——INFO Install dependencies安装出错</h2><ul><li><p>具体报错：</p><p>- </p>  <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo init</span><br><span class="line">INFO Cloning hexo-starter ![img](file:///C:\Users\Jake\AppData\Roaming\Tencent\QQTempSys\[5UQ[BL(6~BS2JV6W&#125;N6[%S.png)https://github.com/hexojs/hexo-starter.git</span><br><span class="line">INFO Install dependencies</span><br><span class="line"><span class="string">&#x27;npm&#x27;</span> is not recognized as an internal or external <span class="built_in">command</span>,</span><br><span class="line">operable program or batch file.</span><br><span class="line">WARN Failed to install dependencies. Please run <span class="string">&#x27;npm install&#x27;</span> <span class="keyword">in</span> <span class="string">&quot;E:\blog\env\blogs\smalltown_blog&quot;</span> folder.</span><br></pre></td></tr></table></figure><ul><li><p>但是nmp安装正确：</p><ul><li><img src="/2023/09/18/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91/image-20230905155553009.png" alt="image-20230905155553009" style="zoom:80%;"></li></ul></li></ul></li><li><p>最关键的一点：修改&#x3D;&#x3D;这两个文件的权限&#x3D;&#x3D;</p><ul><li>原因：在node.js中，想要利用npm安装模块就需要在管理员权限下进行，但是为了方便文件管理，我们选择将文件放在其他磁盘中存储，而在其他位置cmd没有管理员权限</li><li>解决：将新增的两个模块的所有用户组权限全部提高到和管理员相同，操作如下：<ul><li><img src="/2023/09/18/hexo%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91/image-20230905145837588.png" alt="image-20230905145837588"></li></ul></li></ul></li><li><p>修改完权限后，在再开始新建自己的博客文件夹【无所谓位置】，在这个空文件夹内 <code>git bash here</code></p></li></ul><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ npm install -g hexo-cli</span><br><span class="line"></span><br><span class="line">hexo -v <span class="comment">#查看hexo版本信息，查看是否安装成功</span></span><br></pre></td></tr></table></figure><p>​</p><p>其余参考超链接博文继续博客搭建：</p><p><a href="https://blog.csdn.net/sinat_37781304/article/details/82729029?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522169388127516800225537680%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&request_id=169388127516800225537680&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-82729029-null-null.142%5Ev93%5EchatgptT3_2&utm_term=hexo&spm=1018.2226.3001.4187"></a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 博客 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> hexo 博客搭建 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Hello World</title>
       <link href="/2023/09/18/hello-world/"/>
       <url>/2023/09/18/hello-world/</url>
