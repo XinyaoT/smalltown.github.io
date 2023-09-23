@@ -1,6 +1,6 @@
 #web_bg {
     /* 背景图像的地址（url括号里）  */
-    background: url("../img/back.jpg");
+    background: url("../img/back1.jpg");
     /* 背景图像不重复 */
     background-repeat: no-repeat;
     /* 背景图像大小 */
@@ -9,7 +9,7 @@
 /* 文章页背景 */
 .layout > div:first-child:not(.recent-posts) {
   /* 以下代表白色透明度为0.3 */
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
 }
 /* 所有背景（包括首页卡片、文章页、页面页等） */
 #recent-posts > .recent-post-item,
@@ -18,7 +18,7 @@
 .layout_post > #post,
 .read-mode .layout_post > #post {
   /* 以下代表白色透明度为0.3 */
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 /* #page-header {
@@ -35,3 +35,16 @@
   -ms-transition: all 0.5s;
   transition: all 0.5s;
 } */
+/*底部切换按钮*/
+.layout>.recent-posts .pagination>* {
+  display: inline-block;
+  margin: 0 6px;
+  width: 2.5em;
+  height: 2.5em;
+  line-height: 2.5em;
+}
+
+/*底部圆角*/
+#pagination .page-number.current {
+    border-radius: 7px;
+}
