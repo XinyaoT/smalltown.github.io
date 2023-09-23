@@ -13,7 +13,7 @@
       
       <categories>
           
-          <category> 网安技术 </category>
+          <category> 安全知识，网安技术 </category>
           
       </categories>
       
@@ -37,6 +37,8 @@
       
       
       <categories>
+          
+          <category> 安全知识 </category>
           
           <category> 网络攻防 </category>
           
@@ -62,6 +64,8 @@
       
       
       <categories>
+          
+          <category> 技术栈学习 </category>
           
           <category> web应用开发 </category>
           
@@ -112,6 +116,8 @@
       
       
       <categories>
+          
+          <category> 技术栈学习 </category>
           
           <category> web应用开发 </category>
           
