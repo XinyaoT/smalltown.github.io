@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>鉴别机制和技术 | 糖果小镇</title><meta name="author" content="smalltown"><meta name="copyright" content="smalltown"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="鉴别定义 确认实体是他所申明的 鉴别是最重要的安全服务之一 与其他机制的联系 是访问控制服务的一种必要将支持 结合数据完整性机制，数据起源鉴别 对审计机制的支持    身份鉴别的协议基础 身份鉴别协议 通信参与者完成相互的身份鉴别或是别而采用的规程、约定、约束和交换信息的总和 分类 双向鉴别协议 单向鉴别协议      实体鉴别系统的组成 P：出示证件的人 V：验证者 TP：可信第三方 攻击者">
+<meta property="og:type" content="article">
+<meta property="og:title" content="鉴别机制和技术">
+<meta property="og:url" content="https://xinyaot.github.io/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="糖果小镇">
+<meta property="og:description" content="鉴别定义 确认实体是他所申明的 鉴别是最重要的安全服务之一 与其他机制的联系 是访问控制服务的一种必要将支持 结合数据完整性机制，数据起源鉴别 对审计机制的支持    身份鉴别的协议基础 身份鉴别协议 通信参与者完成相互的身份鉴别或是别而采用的规程、约定、约束和交换信息的总和 分类 双向鉴别协议 单向鉴别协议      实体鉴别系统的组成 P：出示证件的人 V：验证者 TP：可信第三方 攻击者">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-11-03T00:20:30.000Z">
+<meta property="article:modified_time" content="2023-11-03T08:45:33.725Z">
+<meta property="article:author" content="smalltown">
+<meta property="article:tag" content="身份鉴别">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xinyaot.github.io/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: smalltown","link":"链接: ","source":"来源: 糖果小镇","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '鉴别机制和技术',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-03 16:45:33'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="css\background.css"><link rel="stylesheet" href="css\mouse.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top_back.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="糖果小镇"><span class="site-name">糖果小镇</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">鉴别机制和技术</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-03T00:20:30.000Z" title="发表于 2023-11-03 08:20:30">2023-11-03</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-03T08:45:33.725Z" title="更新于 2023-11-03 16:45:33">2023-11-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AF%86%EF%BC%8C%E7%BD%91%E5%AE%89%E6%8A%80%E6%9C%AF/">安全知识，网安技术</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="鉴别机制和技术"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="鉴别定义"><a href="#鉴别定义" class="headerlink" title="鉴别定义"></a>鉴别定义</h2><ul>
+<li>确认实体是他所申明的</li>
+<li>鉴别是最重要的安全服务之一</li>
+<li>与其他机制的联系<ul>
+<li>是访问控制服务的一种必要将支持</li>
+<li>结合数据完整性机制，数据起源鉴别</li>
+<li>对审计机制的支持</li>
+</ul>
+</li>
+</ul>
+<h2 id="身份鉴别的协议基础"><a href="#身份鉴别的协议基础" class="headerlink" title="身份鉴别的协议基础"></a>身份鉴别的协议基础</h2><ul>
+<li><h3 id="身份鉴别协议"><a href="#身份鉴别协议" class="headerlink" title="身份鉴别协议"></a>身份鉴别协议</h3><ul>
+<li>通信参与者完成相互的身份鉴别或是别而采用的规程、约定、约束和交换信息的总和</li>
+<li>分类<ul>
+<li>双向鉴别协议</li>
+<li>单向鉴别协议</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="实体鉴别系统的组成"><a href="#实体鉴别系统的组成" class="headerlink" title="实体鉴别系统的组成"></a>实体鉴别系统的组成</h2><ul>
+<li>P：出示证件的人</li>
+<li>V：验证者</li>
+<li>TP：可信第三方</li>
+<li>攻击者</li>
+</ul>
+<h3 id="身份鉴别系统的要求"><a href="#身份鉴别系统的要求" class="headerlink" title="身份鉴别系统的要求"></a>身份鉴别系统的要求</h3><ol>
+<li>认得出的概率极大化</li>
+<li>无可传递性</li>
+<li>被攻击者欺骗的概率极小</li>
+<li>计算有效、通信有效</li>
+<li>秘密参数可以安全存储和传输</li>
+</ol>
+<h3 id="网络环境下的要求"><a href="#网络环境下的要求" class="headerlink" title="网络环境下的要求"></a>网络环境下的要求</h3><ol>
+<li>唯一身份表示（ID）</li>
+<li>抗被动威胁（sniff）</li>
+<li>网络上传输的鉴别信息不可重用</li>
+</ol>
+<h3 id="补充："><a href="#补充：" class="headerlink" title="补充："></a>补充：</h3><p>被动攻击：窃听，不对消息做任何修改</p>
+<p>主动攻击：阻断、伪造、重放——漏洞挖掘、漏洞扫描、漏洞利用、软件升级替换</p>
+<h3 id="实现身份鉴别的途径"><a href="#实现身份鉴别的途径" class="headerlink" title="实现身份鉴别的途径"></a>实现身份鉴别的途径</h3><ul>
+<li>基于——所知、所有、个人特征，双因素，多因素认证。</li>
+</ul>
+<h2 id="鉴别技术分类（单向）"><a href="#鉴别技术分类（单向）" class="headerlink" title="鉴别技术分类（单向）"></a>鉴别技术分类（单向）</h2><ul>
+<li><p>0级鉴别（无）</p>
+</li>
+<li><p>1级鉴别（抗泄露）——F（申请AI、可见别标识符、[数字指纹]）——易受重放攻击</p>
+</li>
+<li><p>2级鉴别（抗泄露、对不同验证者重放的保护【1】）——F（申请AI、可见别标识符、&#x3D;&#x3D;验证者&#x3D;&#x3D;、[数字指纹]）——不能对抗对同一验证者的重放（无法实现对数据源的鉴别（发送出的鉴别的数据来自验证者本人））</p>
+</li>
+<li><p>3级鉴别（抗泄露、对同一验证者重放的保护【2】）——F（申请AI、可见别标识符、&#x3D;&#x3D;唯一数&#x3D;&#x3D;、[数字指纹]）——（唯一数：随机数&#x2F;伪随机数（申请AI生命周期内不可有意重复），时间戳、计数器、密码连）</p>
+</li>
+<li><p>4级鉴别（抗泄露、对同一&#x2F;不同验证者重放的保护）</p>
+<ul>
+<li><p>唯一数机制——F（申请AI、可见别标识符、&#x3D;&#x3D;唯一数、验证者&#x3D;&#x3D;、[数字指纹]）</p>
+</li>
+<li><p>质询机制——质询信息每次都不一样，只有验证者知道</p>
+<ul>
+<li><img src="/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/image-20231103092142424.png" alt="image-20231103092142424"></li>
+</ul>
+</li>
+<li><p>专用加密质询　　真情这和验证者首先要铜鼓一个密钥</p>
+<ul>
+<li><p><img src="/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/image-20231103092415329.png" alt="image-20231103092415329"></p>
+</li>
+<li><blockquote>
+<p>理解：实体鉴别：鉴别是谁</p>
+<p>　　　数据源鉴别：特定数据是否来自指定实体，包含实体鉴别</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p>计算响应机制</p>
+<ul>
+<li>？？？？？</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>理解：【1】其中攻击者尝试使用从一个验证者获取的身份验证令牌或凭证来欺骗另一个验证者</p>
+<p>​			【2】其中攻击者尝试使用从一个验证者获取的身份验证令牌或凭证来欺骗同一个验证者</p>
+</blockquote>
+<h2 id="按机制的配置分类"><a href="#按机制的配置分类" class="headerlink" title="按机制的配置分类"></a>按机制的配置分类</h2><p>联机可信第三方</p>
+<p>脱机可信第三方</p>
+<h2 id="鉴别协议攻防"><a href="#鉴别协议攻防" class="headerlink" title="鉴别协议攻防"></a>鉴别协议攻防</h2><ul>
+<li><p>核心问题：</p>
+<ul>
+<li>保密性——密钥</li>
+<li>时效性</li>
+</ul>
+</li>
+<li><h3 id="重放"><a href="#重放" class="headerlink" title="重放"></a>重放</h3><ul>
+<li>简单重放：攻击者简答复制一条消息，以后重新发送</li>
+<li>可被日志记录的复制品：两份，可以在一个合法的有效时间创内重放一个带时间戳的消息（非法的记录会在在日志中被记录）</li>
+<li>不能别日志记录的复制品：在２的基础上，原始消息已被拦截</li>
+<li>反向重放</li>
+</ul>
+</li>
+<li><h3 id="对抗重放（非重复值）"><a href="#对抗重放（非重复值）" class="headerlink" title="对抗重放（非重复值）"></a>对抗重放（非重复值）</h3><ul>
+<li>序列号——双方必须保持上次的序列号</li>
+<li>时间戳——</li>
+<li>质询&#x2F;应答——连接性的方式（TCP）</li>
+</ul>
+</li>
+</ul>
+<h2 id="双向鉴别协议"><a href="#双向鉴别协议" class="headerlink" title="双向鉴别协议"></a>双向鉴别协议</h2><p>单向叠加，</p>
+<h2 id="鉴别机制"><a href="#鉴别机制" class="headerlink" title="鉴别机制"></a>鉴别机制</h2><h3 id="基于非密码的鉴别机制"><a href="#基于非密码的鉴别机制" class="headerlink" title="基于非密码的鉴别机制"></a>基于非密码的鉴别机制</h3><ul>
+<li><h4 id="口令机制"><a href="#口令机制" class="headerlink" title="口令机制"></a>口令机制</h4><ul>
+<li>口令是鉴别的，密码是加解密的</li>
+<li>PAP协议（快弃用                                      哦）</li>
+</ul>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xinyaot.github.io">smalltown</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xinyaot.github.io/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/">https://xinyaot.github.io/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xinyaot.github.io" target="_blank">糖果小镇</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB/">身份鉴别</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/11/01/Js%E8%AF%AD%E6%B3%95/" title="Js语法"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Js语法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">smalltown</div><div class="author-info__description">少私寡欲，抱朴减速，冷门绝学</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">24</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">27</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">12</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%89%B4%E5%88%AB%E5%AE%9A%E4%B9%89"><span class="toc-number">1.</span> <span class="toc-text">鉴别定义</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%9F%BA%E7%A1%80"><span class="toc-number">2.</span> <span class="toc-text">身份鉴别的协议基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB%E5%8D%8F%E8%AE%AE"><span class="toc-number">2.1.</span> <span class="toc-text">身份鉴别协议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E4%BD%93%E9%89%B4%E5%88%AB%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-number">3.</span> <span class="toc-text">实体鉴别系统的组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%A6%81%E6%B1%82"><span class="toc-number">3.1.</span> <span class="toc-text">身份鉴别系统的要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E7%8E%AF%E5%A2%83%E4%B8%8B%E7%9A%84%E8%A6%81%E6%B1%82"><span class="toc-number">3.2.</span> <span class="toc-text">网络环境下的要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%A5%E5%85%85%EF%BC%9A"><span class="toc-number">3.3.</span> <span class="toc-text">补充：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E8%BA%AB%E4%BB%BD%E9%89%B4%E5%88%AB%E7%9A%84%E9%80%94%E5%BE%84"><span class="toc-number">3.4.</span> <span class="toc-text">实现身份鉴别的途径</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%89%B4%E5%88%AB%E6%8A%80%E6%9C%AF%E5%88%86%E7%B1%BB%EF%BC%88%E5%8D%95%E5%90%91%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">鉴别技术分类（单向）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8C%89%E6%9C%BA%E5%88%B6%E7%9A%84%E9%85%8D%E7%BD%AE%E5%88%86%E7%B1%BB"><span class="toc-number">5.</span> <span class="toc-text">按机制的配置分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%89%B4%E5%88%AB%E5%8D%8F%E8%AE%AE%E6%94%BB%E9%98%B2"><span class="toc-number">6.</span> <span class="toc-text">鉴别协议攻防</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%8D%E6%94%BE"><span class="toc-number">6.1.</span> <span class="toc-text">重放</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%8A%97%E9%87%8D%E6%94%BE%EF%BC%88%E9%9D%9E%E9%87%8D%E5%A4%8D%E5%80%BC%EF%BC%89"><span class="toc-number">6.2.</span> <span class="toc-text">对抗重放（非重复值）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%8C%E5%90%91%E9%89%B4%E5%88%AB%E5%8D%8F%E8%AE%AE"><span class="toc-number">7.</span> <span class="toc-text">双向鉴别协议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6"><span class="toc-number">8.</span> <span class="toc-text">鉴别机制</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E4%BA%8E%E9%9D%9E%E5%AF%86%E7%A0%81%E7%9A%84%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6"><span class="toc-number">8.1.</span> <span class="toc-text">基于非密码的鉴别机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%A3%E4%BB%A4%E6%9C%BA%E5%88%B6"><span class="toc-number">8.1.1.</span> <span class="toc-text">口令机制</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/03/%E9%89%B4%E5%88%AB%E6%9C%BA%E5%88%B6%E5%92%8C%E6%8A%80%E6%9C%AF/" title="鉴别机制和技术">鉴别机制和技术</a><time datetime="2023-11-03T00:20:30.000Z" title="发表于 2023-11-03 08:20:30">2023-11-03</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/01/Js%E8%AF%AD%E6%B3%95/" title="Js语法">Js语法</a><time datetime="2023-11-01T11:32:39.000Z" title="发表于 2023-11-01 19:32:39">2023-11-01</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/23/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF/" title="信息安全技术">信息安全技术</a><time datetime="2023-10-23T00:21:42.000Z" title="发表于 2023-10-23 08:21:42">2023-10-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/18/%E5%B8%83%E5%B1%80/" title="布局">布局</a><time datetime="2023-10-18T11:25:15.000Z" title="发表于 2023-10-18 19:25:15">2023-10-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/10/11/CSS%E8%BF%9B%E9%98%B6/" title="CSS进阶">CSS进阶</a><time datetime="2023-10-11T11:23:31.000Z" title="发表于 2023-10-11 19:23:31">2023-10-11</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By smalltown</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://xinyaot.github.io/categories/博客/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 smalltownの博客踩坑之旅 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://xinyaot.github.io/categories/数学建模/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐱‍👓 smalltownの数学建模论文写手突击 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://xinyaot.github.io/categories/安全知识/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 smalltownの安全知识学习 (1)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://xinyaot.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #D05350;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #CDCEC9}.magnet_link_more{color:#555}.magnet_link{color:white}.magnet_link:hover{color:black}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/21/端口扫描/" alt=""><img width="48" height="48" src="2023/09/21/端口扫描/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-21</span><a class="blog-slider__title" href="2023/09/21/端口扫描/" alt="">端口扫描</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/21/端口扫描/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/25/论文阅读方法/" alt=""><img width="48" height="48" src="2023/09/25/论文阅读方法/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-25</span><a class="blog-slider__title" href="2023/09/25/论文阅读方法/" alt="">论文阅读方法</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/25/论文阅读方法/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/25/恶意网站检测/" alt=""><img width="48" height="48" src="2023/09/25/恶意网站检测/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-25</span><a class="blog-slider__title" href="2023/09/25/恶意网站检测/" alt="">恶意网站检测</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/25/恶意网站检测/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/25/网安技术习题总结/" alt=""><img width="48" height="48" src="2023/09/25/网安技术习题总结/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-25</span><a class="blog-slider__title" href="2023/09/25/网安技术习题总结/" alt="">网安技术习题总结</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/25/网安技术习题总结/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/22/风险评估/" alt=""><img width="48" height="48" src="2023/09/22/风险评估/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-22</span><a class="blog-slider__title" href="2023/09/22/风险评估/" alt="">风险管理</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/22/风险评估/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/数模论文写作/" alt=""><img width="48" height="48" src="2023/09/18/数模论文写作/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/数模论文写作/" alt="">数模论文写作</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/数模论文写作/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/butterfly主题配置踩坑/" alt=""><img width="48" height="48" src="2023/09/18/butterfly主题配置踩坑/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/butterfly主题配置踩坑/" alt="">butterfly主题配置踩坑</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/butterfly主题配置踩坑/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/表格制作/" alt=""><img width="48" height="48" src="2023/09/18/表格制作/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/表格制作/" alt="">表格制作</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/表格制作/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/20/html深入/" alt=""><img width="48" height="48" src="2023/09/20/html深入/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-20</span><a class="blog-slider__title" href="2023/09/20/html深入/" alt="">html深入</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/20/html深入/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/html基础知识/" alt=""><img width="48" height="48" src="2023/09/18/html基础知识/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/html基础知识/" alt="">html基础知识</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/html基础知识/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/hexo博客搭建踩坑/" alt=""><img width="48" height="48" src="2023/09/18/hexo博客搭建踩坑/default.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/hexo博客搭建踩坑/" alt="">hexo博客搭建踩坑</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/hexo博客搭建踩坑/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
