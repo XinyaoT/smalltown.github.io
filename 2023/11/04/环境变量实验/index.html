@@ -1,0 +1,387 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>环境变量实验 | 糖果小镇</title><meta name="author" content="smalltown"><meta name="copyright" content="smalltown"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="1    作业题目本实验室的学习目标是让学生了解环境变量如何影响程序以及系 统行为。环境变量是一组动态命名值，可以影响正在运行的进程将在 计算机上运行。大多数操作系统都使用它们，因为它们是 1979 年引 入 Unix。尽管环境变量会影响程序行为，但它们是如何实现的这一点 很多程序员都不太理解。因此，如果程序使用环境变量程序员不知道 它们被使用，程序可能有漏洞。 在本实验室中，学生将了解环境变量是">
+<meta property="og:type" content="article">
+<meta property="og:title" content="环境变量实验">
+<meta property="og:url" content="https://xinyaot.github.io/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/index.html">
+<meta property="og:site_name" content="糖果小镇">
+<meta property="og:description" content="1    作业题目本实验室的学习目标是让学生了解环境变量如何影响程序以及系 统行为。环境变量是一组动态命名值，可以影响正在运行的进程将在 计算机上运行。大多数操作系统都使用它们，因为它们是 1979 年引 入 Unix。尽管环境变量会影响程序行为，但它们是如何实现的这一点 很多程序员都不太理解。因此，如果程序使用环境变量程序员不知道 它们被使用，程序可能有漏洞。 在本实验室中，学生将了解环境变量是">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png">
+<meta property="article:published_time" content="2023-11-04T13:15:21.000Z">
+<meta property="article:modified_time" content="2023-11-04T13:24:43.434Z">
+<meta property="article:author" content="smalltown">
+<meta property="article:tag" content="envp">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://xinyaot.github.io/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: smalltown","link":"链接: ","source":"来源: 糖果小镇","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '环境变量实验',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2023-11-04 21:24:43'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+    win.getCSS = (url,id = false) => new Promise((resolve, reject) => {
+      const link = document.createElement('link')
+      link.rel = 'stylesheet'
+      link.href = url
+      if (id) link.id = id
+      link.onerror = reject
+      link.onload = link.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        link.onload = link.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(link)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" type="text/css" href="./themes/butterfly/source/css/background.css"><link rel="stylesheet" type="text/css" href="./themes\butterfly\source\css\mouse.css"> - <link rel="stylesheet" type="text/css" href="./themes\butterfly\source\css\custom.css"><!-- hexo injector head_end start --><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiperstyle.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.3.0"></head><body><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/top_back.jpg')"><nav id="nav"><span id="blog-info"><a href="/" title="糖果小镇"><span class="site-name">糖果小镇</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 生活</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/shuoshuo/"><i class="fa-fw fa fa-comments-o"></i><span> 分享</span></a></li><li><a class="site-page child" href="/photos/"><i class="fa-fw fa fa-camera-retro"></i><span> 相册</span></a></li><li><a class="site-page child" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> 影视</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/comment/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">环境变量实验</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-11-04T13:15:21.000Z" title="发表于 2023-11-04 21:15:21">2023-11-04</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-11-04T13:24:43.434Z" title="更新于 2023-11-04 21:24:43">2023-11-04</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AF%86/">安全知识</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AF%86/%E7%BD%91%E7%BB%9C%E6%94%BB%E9%98%B2/">网络攻防</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="环境变量实验"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="1-作业题目"><a href="#1-作业题目" class="headerlink" title="1    作业题目"></a>1    作业题目</h1><p>本实验室的学习目标是让学生了解环境变量如何影响程序以及系</p>
+<p>统行为。环境变量是一组动态命名值，可以影响正在运行的进程将在</p>
+<p>计算机上运行。大多数操作系统都使用它们，因为它们是 1979 年引</p>
+<p>入 Unix。尽管环境变量会影响程序行为，但它们是如何实现的这一点</p>
+<p>很多程序员都不太理解。因此，如果程序使用环境变量程序员不知道</p>
+<p>它们被使用，程序可能有漏洞。</p>
+<p>在本实验室中，学生将了解环境变量是如何工作的，它们是如何</p>
+<p>从父进程到子进程，以及它们如何影响系统&#x2F;程序行为。我们特别感</p>
+<p>兴趣的是如何环境变量影响 Set-UID 程序的行为，这些程序通常是特</p>
+<p>权程序。</p>
+<p>本实验室涵盖以下主题：</p>
+<p>•环境变量</p>
+<p>•SET-UID 程序</p>
+<p>•安全地调用外部程序</p>
+<p>•能力泄漏</p>
+<p>•动态加载程序&#x2F;链接器</p>
+<h1 id="2-实验步骤及结果"><a href="#2-实验步骤及结果" class="headerlink" title="2    实验步骤及结果"></a>2    实验步骤及结果</h1><h1 id="一、-Task-1-Manipulating-Environment-Variables"><a href="#一、-Task-1-Manipulating-Environment-Variables" class="headerlink" title="一、   Task 1: Manipulating Environment Variables"></a>一、   Task 1: Manipulating Environment Variables</h1><p>1.使用 printenv 命令打印出环境变量。</p>
+<p>​               <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211744853.png" alt="image-20231104211744853">                </p>
+<p>2.“ printenv PWD”查看指定环境变量</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211750356.png" alt="image-20231104211750356"></p>
+<p>3.export设置环境变量</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 设置环境变量“TASK1”值为其地址“&#x2F;home&#x2F;seed&#x2F;Labsetup3”</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 打印查看，设置成功</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211758287.png" alt="image-20231104211758287"></p>
+<p>4.unset取消环境变量</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 取消刚刚设置的环境变量TASK1</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 打印查看，取消成功</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211809880.png" alt="image-20231104211809880"></p>
+<h1 id="二、-Task-2-Passing-Environment-Variables-from-Parent-Process-to-Child-Process"><a href="#二、-Task-2-Passing-Environment-Variables-from-Parent-Process-to-Child-Process" class="headerlink" title="二、   Task 2: Passing Environment Variables from Parent Process to Child Process"></a>二、   Task 2: Passing Environment Variables from Parent Process to Child Process</h1><p>Ø Step1：编译运行myprintenv.c，生成a.out写入文件child</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211815305.png" alt="image-20231104211815305"></p>
+<p>Ø Step2：修改myprintenv.c文件，注释子进程中的printenv函数，并取消父进程中的注释，再次编译，将结果保存在另一个文件parent中</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211821217.png" alt="image-20231104211821217"></p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211825088.png" alt="image-20231104211825088"></p>
+<p>Ø Step3：通过 differ 命令对 child 文件和 parent 文件内容进行比较，发现没有输出，说明二者内容相同，即子进程继承了父进程的环境变量。</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211908584.png" alt="image-20231104211908584"></p>
+<p>Ø 解释：</p>
+<p>这里使用了fork函数生成子进程，就不得不说到fork函数的实现机理</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> Fork函数特点是：一次调用，两次返回，fork给父进程返回子进程pid，给其拷贝出来的子进程返回0</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 针对以上原理，fork函数的左右是把父进程的资源拷贝一份给子进程，体现到变量上，他们的虚拟地址就是一样的，所以可以说，子进程父进程共享环境变量，或者子进程继承了父进程的环境变量。</p>
+<h1 id="三、-Task-3-Environment-Variables-and-execve"><a href="#三、-Task-3-Environment-Variables-and-execve" class="headerlink" title="三、  Task 3: Environment Variables and execve()"></a>三、  Task 3: Environment Variables and execve()</h1><p>Ø Step1： 编译运行myenv.c观察输出：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211917364.png" alt="image-20231104211917364"></p>
+<p>发现无输出。</p>
+<p>Ø Step2：修改myenv.c的代码，把当下进程的环境变量添加到函数当中作为参数：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211922699.png" alt="image-20231104211922699"></p>
+<p>Ø Step3：编译运行修改过的myenv.c文件，观察输出：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211928106.png" alt="image-20231104211928106"></p>
+<p>Ø 解释：</p>
+<p>为了解释这个现象。不得不回到本质去理解exceve（）函数的调用过程：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 由于在上一次shellcode编写已经详细说明此函数的参数解释，所以首先简单回顾一下此函数的形参：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211936384.png" alt="image-20231104211936384"></p>
+<p>第三个参数就是环境变量参数。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 该函数与fork函数不同，它不是创建的是一个新的进程，而是调用一个新的进程，原进程的各种数据都会被新调用的进程覆盖，从而会导致原进程的环境变量丢失，解释了第一次编译运行结果为空。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 但是我们可以通过extern char **environ;获取环境变量表，向环境变量参数位置传入，从而将当前进程的环境变量传递给新调用进程的环境变量。正如第二次编译运行结果展示。</p>
+<h1 id="四、-Task-4-Environment-Variables-and-system"><a href="#四、-Task-4-Environment-Variables-and-system" class="headerlink" title="四、   Task 4: Environment Variables and system()"></a>四、   Task 4: Environment Variables and system()</h1><p>Ø Step1：创建sys.c调用system函数，运行命令“&#x2F;usr&#x2F;bin&#x2F;env”</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211942901.png" alt="image-20231104211942901"></p>
+<p>Ø Step2：编译运行该文件，成功打印出环境变量：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104211953331.png" alt="image-20231104211953331"></p>
+<p>Ø 解释：</p>
+<p>为了解释这个实验现象，主要是理解system函数的调用过程：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 这个函数的功能是执行传出的命令参数</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 执行过程是先调用 fork()函数创建子进程</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 子进程继承父进程的环境变量，并调用excel函数执行“&#x2F;bin&#x2F;sh”，即产生一个shell，</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 随后excel再调用exceve并将环境变量数组传递给新调用的进程。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 命令执行完毕比之后会回到原进程。</p>
+<p>这也就解释了为何system（）会打印出原来的进程的环境变量。</p>
+<h1 id="五、-Task-5-Environment-Variable-and-Set-UID-Programs"><a href="#五、-Task-5-Environment-Variable-and-Set-UID-Programs" class="headerlink" title="五、   Task 5: Environment Variable and Set-UID Programs"></a>五、   Task 5: Environment Variable and Set-UID Programs</h1><p>Ø Step1：编写一个程序打印当前进程的环境变量：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212001073.png" alt="image-20231104212001073"></p>
+<p>Ø Step2：编译运行foo.c程序：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212005944.png" alt="image-20231104212005944"></p>
+<p>Ø Step3：为该程序设置root权限并设置为Set-UID程序：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212021132.png" alt="image-20231104212021132"></p>
+<p>Ø Step4：在普通用户权限下（$表示为普通用户；#为 root），对 PATH、LD_LIBRARY_PATH 和 ANY_NAME（自己取名和设置的环境变量）环境变量进行设置：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212026457.png" alt="image-20231104212026457"></p>
+<p>Ø 此时再运行foo，观察我们刚刚设置的环境变量是否被打印：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212031231.png" alt="image-20231104212031231"></p>
+<p>发现LD_LIBRARY_PATH并没有设置成功。</p>
+<p>Ø 解释：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 首先解释LD_LIBRARY_PATH 环境变量的作用：用于指定动态链接库除了默认路径外的其他路径，也就是外部的动态链接库路径LD_LIBRARY_PATH环境变量是一个危险的环境变量，因为它可以改变系统默认的库加载路径，可能会导致系统中的其他程序出现问题。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 此时攻击者可以联合Set-UID程序（让使用者暂时拥有创建者的权限）修改环境变量，让程序连接到外部恶意的动态链接库上。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 但是动态链接器拥有一个安全检查机制：会对 RUID（进程真正拥有者）和 EUID（进程允许访问者）进行比较：若 RUID≠EUID，则此时链接器就 会忽略 LD_LIBRARY_PATH 环境变量，从而使得该程序更加安全。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 这也就解释了为何当我们以root身份创建Set-UID程序后以普通用户身份设置LD_LIBRARY_PATH未成功的原因。</p>
+<h1 id="六、-Task-6-The-PATH-Environment-Variable-and-Set-UID-Programs"><a href="#六、-Task-6-The-PATH-Environment-Variable-and-Set-UID-Programs" class="headerlink" title="六、   Task 6: The PATH Environment Variable and Set-UID Programs"></a>六、   Task 6: The PATH Environment Variable and Set-UID Programs</h1><p>Ø Step1：首先编写两个程序，task6.c用于使用system执行ls命令；ls.c用于执行恶意程序，编译运行ls.c检查程序：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212040176.png" alt="image-20231104212040176"></p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212044167.png" alt="image-20231104212044167"></p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212048992.png" alt="image-20231104212048992"></p>
+<p>Ø Step2：编译运行task6.c，并修改为root权限，设置为Set-UID程序：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212054343.png" alt="image-20231104212054343"></p>
+<p>Ø Step3：关闭保护机制：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212100552.png" alt="image-20231104212100552"></p>
+<p>Ø Step4：将恶意程序的path添加到PATH中：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212104929.png" alt="image-20231104212104929"></p>
+<p>Ø 接下来再次运行task6，成功执行恶意代码：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212114125.png" alt="image-20231104212114125"></p>
+<p>Ø 为了拿到root权限，可以利用已经设置为Set-UID程序的ls调用一个新的shell：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212118775.png" alt="image-20231104212118775"></p>
+<p>如图，已经获得root权限。</p>
+<p>Ø 解释：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 为何可以运行恶意代码：因为我们在调用system的时候使用的是相对路径“ls”，于是我们就可以将前面的PATH环境变量修改至恶意代码处，则运行 Set-UID 程序时，就会链接到我们写的ls程序处。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 为何可以得到root权限：在ls中写入“&#x2F;bin&#x2F;sh”即会调用一个新的shell，由于此时的task6是Set-UID程序，所以当调用一个新的shell时会赋予其创建者的所有权（root），也就拿到了root权限。</p>
+<h1 id="七、-Task-7-The-LD-PRELOAD-Environment-Variable-and-Set-UID-Programs"><a href="#七、-Task-7-The-LD-PRELOAD-Environment-Variable-and-Set-UID-Programs" class="headerlink" title="七、   Task 7: The LD PRELOAD Environment Variable and Set-UID Programs"></a>七、   Task 7: The LD PRELOAD Environment Variable and Set-UID Programs</h1><p>Ø Step1：创建好实验所需要的两个程序：mylib.c与myprog.c:</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> Mylib.c实现一个新的sleep函数，打印字符串，是新的动态链接库</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212130563.png" alt="image-20231104212130563"></p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> Myprog.c执行原本的sleep函数——休眠1s。</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212134984.png" alt="image-20231104212134984"></p>
+<p>Ø Step2：将 mylib.c 编译为动态链接库libmylib.so.1.0.1，由于操作系统优先搜索我们指定的路径，所以会优先执行libmylib.so.1.0.1中的sleep函数：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212139271.png" alt="image-20231104212139271"></p>
+<p>Ø Step3：设置LD_PRELOAD环境变量：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212143465.png" alt="image-20231104212143465"></p>
+<p>Ø Step4：编译myprog.c，使其与动态链接库位于同一目录下：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212147842.png" alt="image-20231104212147842"></p>
+<p>Ø Step5：在以下四种情况下运行myprog文件：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 普通用户：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212152511.png" alt="image-20231104212152511"></p>
+<p>发现执行了动态链接库中的sleep函数。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 将myprog设置为Set-UID程序，设置root权限，在普通用户下运行：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212156785.png" alt="image-20231104212156785"></p>
+<p>发现执行的是系统sleep函数。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 登录root用户，在root下设置LD_PRELOAD路径再执行（保持myprog的Set-UID程序和root权限）</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212202416.png" alt="image-20231104212202416"></p>
+<p>发现执行的是动态链接库中的sleep函数。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 将 myprog 设置为 Set-UID user1 程序，在seed用户下设置 LD_PRELOAD 环境变量并运行：</p>
+<ul>
+<li>先创建一个新的用户user1：</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212209540.png" alt="image-20231104212209540"></p>
+<ul>
+<li>在seed下将 myprog 设置为 Set-UID user1 程序并添加环境变量运行：</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212223962.png" alt="image-20231104212223962"></p>
+<p>发现执行的是系统sleep函数。</p>
+<p>Ø Step6：设计实验解释现象：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 猜测是由于在不同的情况下shell进程（父进程）与myprog进程（子进程）之间环境变量LD_PRELOAD是否被子进程继承到产生最后结果的差异，所以利用myprintenv.c在四种情况下分别比较该环境变量是否相同来解释。</p>
+<ul>
+<li>Seed下保持LD_PRELOAD的设置</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212230719.png" alt="image-20231104212230719"></p>
+<ul>
+<li>Step6.1：在普通用户下运行myprintenv.c，分别比较父子进程的输出：</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212253590.png" alt="image-20231104212253590"></p>
+<p>原因：此时子进程继承父进程的环境变量，所以子进程 myprog能使用新的sleep函数。</p>
+<ul>
+<li>Step6.2：将 myprintenv 设置为 Set-UID root 程序，在普通用户下运行，比较输出文件child2与parent2是否有不同：</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212258764.png" alt="image-20231104212258764"></p>
+<p>原因：此时myprog 程序所有者是 root， 而程序运行者是 seed，RUID 和 EUID 没有一致，那么LD_PRELOAD变量就被myprog忽略了，所以此时执行原来的sleep函数。</p>
+<ul>
+<li>Step6.3：将 myprintenv 设置为 Set-UID root 程序，在 root 下设置 LD_PRELOAD 环境变量并运行查看输出文件是否有不同：</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212311615.png" alt="image-20231104212311615"></p>
+<p>原因：myprog 程序所有者是 root， 而程序运行也是root，RUID和EUID一致，那么LD_PRELOAD设置成功，所以此时执行新的sleep函数。</p>
+<ul>
+<li>将 myprintenv 设置为 Set-UID user1 程序，在 seed 用户 下设置 LD_PRELOAD 环境变量并运行，查看输出文件是否有不同：</li>
+</ul>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212323674.png" alt="image-20231104212323674"></p>
+<p>原因：此时 myprog 程序所有者是user1，而程序运行者是seed，RUID 和 EUID 没有一致，那么LD_PRELOAD变量就被myprog忽略了，所以此时执行原来的sleep函数。</p>
+<p>Ø 总结：动态链接库具有保护机制，当RUID与EUID不同时，指示动态链接库的LD_PRELOAD环境变量就会被忽略；当一致时，LD_PRELOAD环境变量让链接器将sleep()函数和用户的代码链接起来，并且将该环境变量加入新的共享库，程序会调用新的sleep()函数。</p>
+<h1 id="八、-Task-8-Invoking-External-Programs-Using-system-versus-execve"><a href="#八、-Task-8-Invoking-External-Programs-Using-system-versus-execve" class="headerlink" title="八、   Task 8: Invoking External Programs Using system() versus execve()"></a>八、   Task 8: Invoking External Programs Using system() versus execve()</h1><p>Ø Step1：创建task8.c文件，内容为实验手册代码：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212333968.png" alt="image-20231104212333968"></p>
+<p>该程序实现了如下功能：输入文件名，查找文件，但不能够对文件进行修改。</p>
+<p>实现方式为：command &#x3D; v[0]+v[1]，即 command &#x3D; &#x2F;bin&#x2F;cat v[1]，随后使用system（）执行此命令。</p>
+<p>Ø Step2：首先在root权限下新建一个test目录并在其中新建一个test.txt测试文件，查看test.txt文件的权限为不可写、不可删。 </p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212339459.png" alt="image-20231104212339459"></p>
+<p>Ø Step3：随后编译task8.c为root权限下的Set-UID程序，运行它，查找test.txt文件：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212345008.png" alt="image-20231104212345008"></p>
+<p>Ø Step4：尝试越权：</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 由于system函数会调用shell，所以尝试在.&#x2F;task8之后构造bash命令，这样由于该程序还是Set-UID程序，所以在shell中就会拿到root权限：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212350067.png" alt="image-20231104212350067"></p>
+<p>Ø Step5：注释掉 system()，改用 execve()函数，再重复上述操作：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212355223.png" alt="image-20231104212355223"></p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212359430.png" alt="image-20231104212359430"></p>
+<p>Ø 结果解释：</p>
+<p>这个实验非常巧妙地证实了system函数与exceve函数的调用差异，</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> System函数的调用会利用fork函数创建一个子进程，经过一个shell，这样就给我们“从输入上拼接命令”一个实现的可能，因为shell会自动去执行我们分号以后的命令，又由于本身程序是一个Set-UID程序，从而获取到了root权限。</p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> Exceve函数则不会调用fork函数，而是直接调用一个新的进程，也就不会调用一个shell，那么拼接命令越权就难以实现。安全性比system函数高。</p>
+<h1 id="九、-Task-9-Capability-Leaking"><a href="#九、-Task-9-Capability-Leaking" class="headerlink" title="九、   Task 9: Capability Leaking"></a>九、   Task 9: Capability Leaking</h1><p>Ø Step1：新建task9.c程序，理解代码含义：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212408048.png" alt="image-20231104212408048"></p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/clip_image001.gif" alt="*"> 该代码原本的含义是希望在执行打开“&#x2F;etc&#x2F;zzz”打印文件标识符以后，就降低root权限，但是由于改代码执行的流程是：先打开文件，获得了读写权限，再将进程的EUID设置为当前用户，降低权限，特殊的读写权限没有收回，就存在权限泄露的问题。</p>
+<p>Ø Step2：以root权限创建etc目录，新建zzz文件，赋权0644：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212415103.png" alt="image-20231104212415103"></p>
+<p>Ø Step3：修改task9.c下的文件路径：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212419481.png" alt="image-20231104212419481"></p>
+<p>Ø Step4：编译task9.c，设置为Set-UID root程序:</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212428421.png" alt="image-20231104212428421"></p>
+<p>Ø Step5:运行task9，尝试写入一些内容到zzz中：</p>
+<p> <img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212433607.png" alt="image-20231104212433607"></p>
+<p><img src="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/image-20231104212438753.png" alt="image-20231104212438753"> </p>
+<p>发现成功写入！</p>
+<p>Ø 解释：详细解释见Step1的代码含义解释。</p>
+<h1 id="十、-总结"><a href="#十、-总结" class="headerlink" title="十、   总结"></a>十、   总结</h1><p>Ø 本次实验主要利用环境变量进行了3个方面的攻击，第一种是动态链接器+Set-UID程序提权攻击，第二种是system+Set-UID程序攻击；第三种是Set-UID出现的权限泄露。而且在实验过程中，我们主要是理解环境变量的漏洞原理，清楚了Set-UID程序的运行机制、进程创建的环境变量传递关系、操作系统对环境变量的搜寻机制、一些系统调用函数、shell命令变量的实现机理。</p>
+<p>Ø 经过本次实验，再软件从开发过程中，我们要特别注意环境变量的设置，为了防止恶意构造的命令执行，应该使用更安全的函数，如 execve，来直接执行可执行文件而不是system函数。</p>
+<p>Ø setuid 函数用于将进程的 EUID 设置为指定的 UID。然而，为了防止权限泄露问题的出现，需要及时控制和清理特权能力。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://xinyaot.github.io">smalltown</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://xinyaot.github.io/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/">https://xinyaot.github.io/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://xinyaot.github.io" target="_blank">糖果小镇</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/envp/">envp</a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2023/11/08/JS/" title="JS"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JS</div></div></a></div><div class="next-post pull-right"><a href="/2023/11/04/shellcode%E7%BC%96%E5%86%99/" title="shellcode编写"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">shellcode编写</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://i.loli.net/2021/02/24/5O1day2nriDzjSu.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">smalltown</div><div class="author-info__description">少私寡欲，抱朴减速，冷门绝学</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">30</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">29</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E4%BD%9C%E4%B8%9A%E9%A2%98%E7%9B%AE"><span class="toc-number">1.</span> <span class="toc-text">1    作业题目</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-%E5%AE%9E%E9%AA%8C%E6%AD%A5%E9%AA%A4%E5%8F%8A%E7%BB%93%E6%9E%9C"><span class="toc-number">2.</span> <span class="toc-text">2    实验步骤及结果</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81-Task-1-Manipulating-Environment-Variables"><span class="toc-number">3.</span> <span class="toc-text">一、   Task 1: Manipulating Environment Variables</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-Task-2-Passing-Environment-Variables-from-Parent-Process-to-Child-Process"><span class="toc-number">4.</span> <span class="toc-text">二、   Task 2: Passing Environment Variables from Parent Process to Child Process</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81-Task-3-Environment-Variables-and-execve"><span class="toc-number">5.</span> <span class="toc-text">三、  Task 3: Environment Variables and execve()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-Task-4-Environment-Variables-and-system"><span class="toc-number">6.</span> <span class="toc-text">四、   Task 4: Environment Variables and system()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81-Task-5-Environment-Variable-and-Set-UID-Programs"><span class="toc-number">7.</span> <span class="toc-text">五、   Task 5: Environment Variable and Set-UID Programs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81-Task-6-The-PATH-Environment-Variable-and-Set-UID-Programs"><span class="toc-number">8.</span> <span class="toc-text">六、   Task 6: The PATH Environment Variable and Set-UID Programs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81-Task-7-The-LD-PRELOAD-Environment-Variable-and-Set-UID-Programs"><span class="toc-number">9.</span> <span class="toc-text">七、   Task 7: The LD PRELOAD Environment Variable and Set-UID Programs</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AB%E3%80%81-Task-8-Invoking-External-Programs-Using-system-versus-execve"><span class="toc-number">10.</span> <span class="toc-text">八、   Task 8: Invoking External Programs Using system() versus execve()</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B9%9D%E3%80%81-Task-9-Capability-Leaking"><span class="toc-number">11.</span> <span class="toc-text">九、   Task 9: Capability Leaking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8D%81%E3%80%81-%E6%80%BB%E7%BB%93"><span class="toc-number">12.</span> <span class="toc-text">十、   总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/17/%E9%98%B2%E7%81%AB%E5%A2%99%E6%8A%80%E6%9C%AF/" title="防火墙技术">防火墙技术</a><time datetime="2023-11-17T00:28:05.000Z" title="发表于 2023-11-17 08:28:05">2023-11-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/15/JQuery/" title="JQuery">JQuery</a><time datetime="2023-11-15T11:21:36.000Z" title="发表于 2023-11-15 19:21:36">2023-11-15</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/10/%E8%AE%BF%E9%97%AE%E6%8E%A7%E5%88%B6/" title="访问控制">访问控制</a><time datetime="2023-11-10T01:24:39.000Z" title="发表于 2023-11-10 09:24:39">2023-11-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/08/JS/" title="JS">JS</a><time datetime="2023-11-08T11:30:08.000Z" title="发表于 2023-11-08 19:30:08">2023-11-08</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2023/11/04/%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F%E5%AE%9E%E9%AA%8C/" title="环境变量实验">环境变量实验</a><time datetime="2023-11-04T13:15:21.000Z" title="发表于 2023-11-04 21:15:21">2023-11-04</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 By smalltown</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div class="no-result" id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js"></script></div></div><!-- hexo injector body_end start --> <script data-pjax>if(document.getElementById('recent-posts') && (location.pathname ==='/'|| '/' ==='all')){
+    var parent = document.getElementById('recent-posts');
+    var child = '<div class="recent-post-item" style="width:100%;height: auto"><div id="catalog_magnet"><div class="magnet_item"><a class="magnet_link" href="https://xinyaot.github.io/categories/博客/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📚 smalltownの博客踩坑之旅 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://xinyaot.github.io/categories/数学建模/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">🐱‍👓 smalltownの数学建模论文写手突击 (2)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item"><a class="magnet_link" href="https://xinyaot.github.io/categories/安全知识/"><div class="magnet_link_context" style=""><span style="font-weight:500;flex:1">📒 smalltownの安全知识学习 (6)</span><span style="padding:0px 4px;border-radius: 8px;"><i class="fas fa-arrow-circle-right"></i></span></div></a></div><div class="magnet_item" style="visibility: hidden"></div><a class="magnet_link_more"  href="https://xinyaot.github.io/categories" style="flex:1;text-align: center;margin-bottom: 10px;">查看更多...</a></div></div>';
+    console.log('已挂载magnet')
+    parent.insertAdjacentHTML("afterbegin",child)}
+     </script><style>#catalog_magnet{flex-wrap: wrap;display: flex;width:100%;justify-content:space-between;padding: 10px 10px 0 10px;align-content: flex-start;}.magnet_item{flex-basis: calc(50% - 5px);background: #D05350;margin-bottom: 10px;border-radius: 8px;transition: all 0.2s ease-in-out;}.magnet_item:hover{background: #CDCEC9}.magnet_link_more{color:#555}.magnet_link{color:white}.magnet_link:hover{color:black}@media screen and (max-width: 600px) {.magnet_item {flex-basis: 100%;}}.magnet_link_context{display:flex;padding: 10px;font-size:16px;transition: all 0.2s ease-in-out;}.magnet_link_context:hover{padding: 10px 20px;}</style>
+    <style></style><script data-pjax>
+  function butterfly_swiper_injector_config(){
+    var parent_div_git = document.getElementById('recent-posts');
+    var item_html = '<div class="recent-post-item" style="height: auto;width: 100%"><div class="blog-slider swiper-container-fade swiper-container-horizontal" id="swiper_container"><div class="blog-slider__wrp swiper-wrapper" style="transition-duration: 0ms;"><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/21/端口扫描/" alt=""><img width="48" height="48" src="2023/09/21/端口扫描/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-21</span><a class="blog-slider__title" href="2023/09/21/端口扫描/" alt="">端口扫描</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/21/端口扫描/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/25/论文阅读方法/" alt=""><img width="48" height="48" src="2023/09/25/论文阅读方法/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-25</span><a class="blog-slider__title" href="2023/09/25/论文阅读方法/" alt="">论文阅读方法</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/25/论文阅读方法/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/25/恶意网站检测/" alt=""><img width="48" height="48" src="2023/09/25/恶意网站检测/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-25</span><a class="blog-slider__title" href="2023/09/25/恶意网站检测/" alt="">恶意网站检测</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/25/恶意网站检测/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/25/网安技术习题总结/" alt=""><img width="48" height="48" src="2023/09/25/网安技术习题总结/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-25</span><a class="blog-slider__title" href="2023/09/25/网安技术习题总结/" alt="">网安技术习题总结</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/25/网安技术习题总结/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/22/风险评估/" alt=""><img width="48" height="48" src="2023/09/22/风险评估/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-22</span><a class="blog-slider__title" href="2023/09/22/风险评估/" alt="">风险管理</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/22/风险评估/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/数模论文写作/" alt=""><img width="48" height="48" src="2023/09/18/数模论文写作/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/数模论文写作/" alt="">数模论文写作</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/数模论文写作/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/butterfly主题配置踩坑/" alt=""><img width="48" height="48" src="2023/09/18/butterfly主题配置踩坑/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/butterfly主题配置踩坑/" alt="">butterfly主题配置踩坑</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/butterfly主题配置踩坑/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/表格制作/" alt=""><img width="48" height="48" src="2023/09/18/表格制作/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/表格制作/" alt="">表格制作</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/表格制作/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/20/html深入/" alt=""><img width="48" height="48" src="2023/09/20/html深入/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-20</span><a class="blog-slider__title" href="2023/09/20/html深入/" alt="">html深入</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/20/html深入/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/html基础知识/" alt=""><img width="48" height="48" src="2023/09/18/html基础知识/cover.png" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/html基础知识/" alt="">html基础知识</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/html基础知识/" alt="">详情   </a></div></div><div class="blog-slider__item swiper-slide" style="width: 750px; opacity: 1; transform: translate3d(0px, 0px, 0px); transition-duration: 0ms;"><a class="blog-slider__img" href="2023/09/18/hexo博客搭建踩坑/" alt=""><img width="48" height="48" src="2023/09/18/hexo博客搭建踩坑/default.jpeg" alt="" onerror="this.src=https://unpkg.zhimg.com/akilar-candyassets/image/loading.gif; this.onerror = null;"/></a><div class="blog-slider__content"><span class="blog-slider__code">2023-09-18</span><a class="blog-slider__title" href="2023/09/18/hexo博客搭建踩坑/" alt="">hexo博客搭建踩坑</a><div class="blog-slider__text">再怎么看我也不知道怎么描述它的啦！</div><a class="blog-slider__button" href="2023/09/18/hexo博客搭建踩坑/" alt="">详情   </a></div></div></div><div class="blog-slider__pagination swiper-pagination-clickable swiper-pagination-bullets"></div></div></div>';
+    console.log('已挂载butterfly_swiper')
+    parent_div_git.insertAdjacentHTML("afterbegin",item_html)
+    }
+  var elist = 'undefined'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_swiper_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_swiper_injector_config();
+  }
+  </script><script defer src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper.min.js"></script><script defer data-pjax src="https://npm.elemecdn.com/hexo-butterfly-swiper/lib/swiper_init.js"></script><!-- hexo injector body_end end --></body></html>
